@@ -14,7 +14,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -27,217 +27,207 @@
         .container {
             width: 100%;
             max-width: 1200px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 25px;
-            padding: 30px;
+            background: #fff9e6;
+            border-radius: 20px;
+            padding: 25px;
             text-align: center;
             position: relative;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-            border: 8px solid #d4a017;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            border: 5px solid #d4a017;
             z-index: 2;
-            overflow: hidden;
-        }
-
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://www.transparenttextures.com/patterns/arabesque.png');
-            opacity: 0.1;
-            z-index: -1;
         }
 
         .header {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             position: relative;
-            padding-bottom: 20px;
-            border-bottom: 4px dashed #d4a017;
+            padding-bottom: 15px;
+            border-bottom: 3px dashed #d4a017;
         }
 
         .header h1 {
             color: #8b4513;
-            font-size: 3.5rem;
-            margin-bottom: 15px;
+            font-size: 3rem;
+            margin-bottom: 10px;
             font-weight: 900;
-            text-shadow: 3px 3px 0 #ffd700;
-            letter-spacing: 2px;
-            background: linear-gradient(to right, #b21f1f, #1a2a6c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 0 #ffd700;
+            letter-spacing: 1px;
         }
 
         .header p {
             color: #a52a2a;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
-            line-height: 1.7;
+            line-height: 1.6;
+        }
+
+        /* أنماط الزخرفة الشعبية */
+        .folk-pattern {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .pattern-1 {
+            top: 10px;
+            left: 10px;
+            background: radial-gradient(circle, #8b4513 10%, transparent 10%);
+            background-size: 20px 20px;
+        }
+
+        .pattern-2 {
+            bottom: 10px;
+            right: 10px;
+            background: linear-gradient(45deg, #ff6b6b 25%, transparent 25%, transparent 75%, #ff6b6b 75%),
+                        linear-gradient(45deg, #ff6b6b 25%, transparent 25%, transparent 75%, #ff6b6b 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
         }
 
         .game-sections {
             display: flex;
             flex-wrap: wrap;
-            gap: 25px;
-            margin-bottom: 30px;
+            gap: 20px;
+            margin-bottom: 25px;
         }
 
         .section {
             flex: 1;
             min-width: 300px;
-            background: rgba(255, 243, 204, 0.9);
-            border-radius: 20px;
-            padding: 25px;
-            border: 4px solid #d4a017;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://www.transparenttextures.com/patterns/arabesque.png');
-            opacity: 0.1;
-            z-index: 0;
+            background: #fff3cc;
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #d4a017;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .section h3 {
             color: #8b4513;
-            margin-bottom: 25px;
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(to bottom, #ffd700, #d4a017);
-            padding: 12px;
-            border-radius: 15px;
-            border: 3px solid #8b4513;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: #ffd700;
+            padding: 8px;
+            border-radius: 10px;
+            border: 2px solid #d4a017;
         }
 
+        /* إعدادات الوقت */
         .time-options {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .time-option {
-            padding: 18px 25px;
+            padding: 15px 20px;
             background: #fff;
-            border-radius: 15px;
-            border: 3px solid #d4a017;
-            font-size: 1.4rem;
-            font-weight: 800;
+            border-radius: 10px;
+            border: 2px solid #d4a017;
+            font-size: 1.2rem;
+            font-weight: 700;
             color: #8b4513;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 120px;
-            position: relative;
-            z-index: 1;
+            min-width: 100px;
         }
 
         .time-option:hover, .time-option.active {
             background: linear-gradient(to bottom, #ffd700, #d4a017);
             color: #8b4513;
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
+        /* إعدادات الفرق */
         .team-options {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
         }
 
         .team-option {
-            padding: 18px;
+            padding: 15px;
             background: #fff;
-            border-radius: 15px;
-            border: 3px solid #d4a017;
-            font-size: 1.4rem;
-            font-weight: 800;
+            border-radius: 10px;
+            border: 2px solid #d4a017;
+            font-size: 1.2rem;
+            font-weight: 700;
             color: #8b4513;
             cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
         }
 
         .team-option:hover, .team-option.active {
             background: linear-gradient(to bottom, #4da6ff, #0066cc);
             color: white;
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .team-names {
             display: none;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         .team-input {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .team-input input {
-            padding: 15px 20px;
-            border: 3px solid #d4a017;
-            border-radius: 15px;
-            font-size: 1.2rem;
+            padding: 12px 15px;
+            border: 2px solid #d4a017;
+            border-radius: 10px;
+            font-size: 1rem;
             width: 100%;
-            max-width: 350px;
-            margin: 0 auto 15px;
+            max-width: 300px;
+            margin: 0 auto 10px;
             background: #fff;
             color: #8b4513;
             font-weight: 700;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
+        /* إعدادات اللاعبين */
         .player-setup {
-            margin-top: 25px;
+            margin-top: 20px;
         }
 
         .player-input {
             display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 15px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .player-input input {
-            padding: 15px 20px;
-            border: 3px solid #d4a017;
-            border-radius: 15px;
-            font-size: 1.2rem;
-            width: 300px;
+            padding: 12px 15px;
+            border: 2px solid #d4a017;
+            border-radius: 10px;
+            font-size: 1rem;
+            width: 250px;
             background: #fff;
             color: #8b4513;
             font-weight: 700;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .player-input button {
-            padding: 15px 25px;
+            padding: 12px 20px;
             background: linear-gradient(to bottom, #ff6b6b, #d9534f);
             color: white;
             border: none;
-            border-radius: 15px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 1.2rem;
-            font-weight: 800;
+            font-size: 1rem;
+            font-weight: 700;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 0 #8b0000;
+            box-shadow: 0 4px 0 #8b0000;
         }
 
         .player-input button:hover {
@@ -246,48 +236,47 @@
         }
 
         .players-list {
-            margin-top: 20px;
+            margin-top: 15px;
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 10px;
             justify-content: center;
         }
 
         .player-tag {
             background: linear-gradient(to bottom, #ffd700, #d4a017);
             color: #8b4513;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-size: 1.2rem;
-            font-weight: 800;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 12px;
-            box-shadow: 0 4px 0 #b8860b;
-            border: 3px solid #8b4513;
+            gap: 8px;
+            box-shadow: 0 3px 0 #b8860b;
+            border: 2px solid #8b4513;
         }
 
+        /* بدء اللعبة */
         .start-btn {
             background: linear-gradient(to bottom, #32CD32, #228B22);
             color: white;
-            padding: 20px 50px;
+            padding: 18px 40px;
             border: none;
-            border-radius: 20px;
-            font-size: 1.8rem;
-            font-weight: 800;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 0 #006400;
-            margin-top: 30px;
+            box-shadow: 0 6px 0 #006400;
+            margin-top: 20px;
             display: inline-flex;
             align-items: center;
-            gap: 20px;
-            position: relative;
-            z-index: 1;
+            gap: 15px;
         }
 
         .start-btn:hover {
-            transform: translateY(5px);
+            transform: translateY(3px);
             box-shadow: 0 3px 0 #006400;
         }
 
@@ -295,9 +284,10 @@
             background: #a9a9a9;
             cursor: not-allowed;
             transform: none;
-            box-shadow: 0 8px 0 #696969;
+            box-shadow: 0 6px 0 #696969;
         }
 
+        /* قسم اللعبة */
         .game-section {
             display: none;
         }
@@ -306,63 +296,61 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 4px dashed #d4a017;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #d4a017;
         }
 
         .team-display {
             background: #ffd700;
-            padding: 15px 30px;
-            border-radius: 15px;
-            font-weight: 800;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 700;
             color: #8b4513;
-            border: 3px solid #d4a017;
-            font-size: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid #d4a017;
+            font-size: 1.2rem;
         }
 
         .timer-container {
             background: linear-gradient(to bottom, #ff6b6b, #d9534f);
-            border-radius: 20px;
-            padding: 20px;
-            min-width: 180px;
-            border: 4px solid #8b0000;
-            box-shadow: 0 8px 0 #8b0000;
+            border-radius: 15px;
+            padding: 15px;
+            min-width: 150px;
+            border: 3px solid #8b0000;
+            box-shadow: 0 5px 0 #8b0000;
         }
 
         .timer-display {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 900;
             color: white;
-            text-shadow: 3px 3px 0 #8b0000;
+            text-shadow: 2px 2px 0 #8b0000;
         }
 
         .game-board {
             display: flex;
-            gap: 25px;
-            margin-bottom: 30px;
+            gap: 20px;
+            margin-bottom: 25px;
         }
 
         .scoreboard, .leaderboard {
-            background: rgba(255, 243, 204, 0.9);
-            border-radius: 20px;
-            padding: 20px;
-            border: 4px solid #d4a017;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            background: #fff3cc;
+            border-radius: 15px;
+            padding: 15px;
+            border: 2px solid #d4a017;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             flex: 1;
-            position: relative;
         }
 
         .scoreboard h3, .leaderboard h3 {
             color: #8b4513;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(to bottom, #ffd700, #d4a017);
-            padding: 12px;
-            border-radius: 15px;
-            border: 3px solid #8b4513;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: #ffd700;
+            padding: 8px;
+            border-radius: 10px;
+            border: 2px solid #d4a017;
         }
 
         .score-item, .leader-item {
@@ -370,47 +358,38 @@
             justify-content: space-between;
             align-items: center;
             background: #fff;
-            padding: 15px 20px;
-            margin: 10px 0;
-            border-radius: 15px;
-            border: 3px solid #d4a017;
-            font-weight: 800;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 10px;
+            border: 2px solid #d4a017;
+            font-weight: 700;
             color: #8b4513;
-            font-size: 1.3rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .score-item:hover, .leader-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            font-size: 1.1rem;
         }
 
         .score-item.current-player, .leader-item.top-player {
             background: linear-gradient(to bottom, #ffd700, #d4a017);
             transform: scale(1.05);
-            box-shadow: 0 6px 0 #b8860b;
+            box-shadow: 0 4px 0 #b8860b;
             border-color: #8b4513;
         }
 
         .riddle-box {
-            background: rgba(255, 243, 204, 0.9);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 25px;
-            border: 4px solid #d4a017;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            position: relative;
+            background: #fff3cc;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 2px solid #d4a017;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .difficulty-tag {
             display: inline-block;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
         }
 
         .easy { background: #32CD32; color: white; }
@@ -418,211 +397,178 @@
         .hard { background: #FF4500; color: white; }
 
         .riddle-text {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #8b4513;
-            line-height: 1.9;
-            margin-bottom: 30px;
-            font-weight: 800;
-            padding: 25px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-weight: 700;
+            padding: 20px;
             background: #fff;
-            border-radius: 20px;
-            border: 3px dashed #d4a017;
-            min-height: 220px;
+            border-radius: 15px;
+            border: 2px dashed #d4a017;
+            min-height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
         .answer-section {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .answer-input {
-            padding: 18px 25px;
-            border: 4px solid #d4a017;
-            border-radius: 15px;
-            font-size: 1.4rem;
+            padding: 15px 20px;
+            border: 3px solid #d4a017;
+            border-radius: 10px;
+            font-size: 1.2rem;
             width: 100%;
-            max-width: 700px;
-            margin-bottom: 25px;
+            max-width: 600px;
+            margin-bottom: 20px;
             background: #fff;
             color: #8b4513;
-            font-weight: 800;
+            font-weight: 700;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .answer-buttons {
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 20px;
             flex-wrap: wrap;
         }
 
         .answer-btn {
-            padding: 18px 35px;
-            font-size: 1.4rem;
-            font-weight: 800;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
             border: none;
-            border-radius: 15px;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 0;
-            display: flex;
+            box-shadow: 0 4px 0;
+            display: inline-flex;
             align-items: center;
-            gap: 15px;
-            min-width: 250px;
-            justify-content: center;
+            gap: 10px;
         }
 
         .submit-btn {
             background: linear-gradient(to bottom, #4da6ff, #0066cc);
             color: white;
-            box-shadow: 0 5px 0 #003366;
+            box-shadow: 0 4px 0 #003366;
         }
 
         .skip-btn {
             background: linear-gradient(to bottom, #ffa500, #cc8400);
             color: white;
-            box-shadow: 0 5px 0 #8b4513;
+            box-shadow: 0 4px 0 #8b4513;
         }
 
         .answer-btn:hover {
-            transform: translateY(5px);
+            transform: translateY(3px);
             box-shadow: 0 2px 0;
         }
 
         .feedback {
-            margin-top: 25px;
-            padding: 25px;
-            border-radius: 20px;
-            font-size: 1.8rem;
-            font-weight: 800;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.4rem;
+            font-weight: 700;
             text-align: center;
             transition: all 0.3s ease;
-            border: 4px solid;
-            min-height: 120px;
+            border: 3px solid;
+            min-height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .correct {
             background: linear-gradient(to bottom, #c6f6d5, #9ae6b4);
             color: #22543d;
             border-color: #48bb78;
-            animation: pulse 0.5s ease-in-out;
         }
 
         .incorrect {
             background: linear-gradient(to bottom, #fed7d7, #feb2b2);
             color: #742a2a;
             border-color: #e53e3e;
-            animation: shake 0.5s ease-in-out;
         }
 
         .next-btn {
             background: linear-gradient(to bottom, #38a169, #2f855a);
             color: white;
-            padding: 18px 45px;
-            font-size: 1.6rem;
-            font-weight: 800;
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            font-weight: 700;
             border: none;
-            border-radius: 15px;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 25px;
-            box-shadow: 0 5px 0 #1a3c29;
+            margin-top: 20px;
+            box-shadow: 0 4px 0 #1a3c29;
             display: inline-flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         .next-btn:hover {
-            transform: translateY(5px);
+            transform: translateY(3px);
             box-shadow: 0 2px 0 #1a3c29;
         }
 
+        /* نهاية اللعبة */
         .game-over {
             display: none;
             text-align: center;
-            padding: 50px;
-            background: rgba(255, 243, 204, 0.95);
-            border-radius: 25px;
-            margin-top: 30px;
-            border: 6px solid #d4a017;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-            position: relative;
+            padding: 40px;
+            background: #fff3cc;
+            border-radius: 20px;
+            margin-top: 20px;
+            border: 5px solid #d4a017;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .winner-announcement {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: #8b4513;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             font-weight: 900;
-            text-shadow: 3px 3px 0 #ffd700;
-            background: linear-gradient(to bottom, #ffd700, #d4a017);
-            padding: 25px;
-            border-radius: 25px;
-            border: 4px solid #8b4513;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 0 #ffd700;
+            background: #ffd700;
+            padding: 20px;
+            border-radius: 20px;
+            border: 3px solid #d4a017;
         }
 
         .final-scores {
-            margin-top: 40px;
+            margin-top: 30px;
             background: #fff;
-            border-radius: 25px;
-            padding: 30px;
-            border: 4px solid #d4a017;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            padding: 20px;
+            border: 3px solid #d4a017;
         }
 
         .restart-btn {
             background: linear-gradient(to bottom, #ff6b6b, #d9534f);
             color: white;
-            padding: 20px 55px;
-            font-size: 1.8rem;
-            font-weight: 800;
+            padding: 18px 50px;
+            font-size: 1.5rem;
+            font-weight: 700;
             border: none;
-            border-radius: 20px;
+            border-radius: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 40px;
-            box-shadow: 0 8px 0 #8b0000;
+            margin-top: 30px;
+            box-shadow: 0 6px 0 #8b0000;
         }
 
         .restart-btn:hover {
-            transform: translateY(5px);
+            transform: translateY(3px);
             box-shadow: 0 3px 0 #8b0000;
         }
 
-        .progress-container {
-            width: 100%;
-            background: #e0e0e0;
-            border-radius: 10px;
-            margin: 20px 0;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .progress-bar {
-            height: 25px;
-            background: linear-gradient(to right, #32CD32, #228B22);
-            border-radius: 10px;
-            width: 0%;
-            transition: width 0.5s ease;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .progress-text {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #8b4513;
-            margin-top: 10px;
-        }
-
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
             .game-sections {
                 flex-direction: column;
             }
@@ -632,111 +578,45 @@
             }
             
             .header h1 {
-                font-size: 2.8rem;
+                font-size: 2.2rem;
             }
             
             .header p {
-                font-size: 1.4rem;
+                font-size: 1.1rem;
             }
             
             .riddle-text {
-                font-size: 1.8rem;
-                padding: 20px;
+                font-size: 1.4rem;
+                padding: 15px;
             }
             
             .answer-buttons {
                 flex-direction: column;
-                gap: 15px;
+                gap: 10px;
             }
             
             .answer-btn {
                 width: 100%;
-                max-width: 350px;
+                max-width: 300px;
                 justify-content: center;
             }
         }
 
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.3rem;
-            }
-            
-            .header p {
-                font-size: 1.2rem;
-            }
-            
-            .player-input {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .player-input input {
-                width: 100%;
-                max-width: 350px;
-            }
-            
-            .time-options, .team-options {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .time-option, .team-option {
-                width: 100%;
-                max-width: 300px;
-            }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-
-        .confetti {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background-color: #ffd700;
-            border-radius: 50%;
-            animation: confetti-fall 3s ease-in-out infinite;
-            z-index: 1;
-        }
-
-        @keyframes confetti-fall {
-            0% { transform: translateY(-100px) rotate(0deg); }
-            100% { transform: translateY(100vh) rotate(360deg); }
-        }
-
-        .skip-player-btn {
-            background: linear-gradient(to bottom, #a9a9a9, #808080);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 0 #696969;
-        }
-
-        .skip-player-btn:hover {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 #696969;
+        .error-message {
+            color: #ff0000;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
         }
     </style>
 </head>
 <body>
+    <div class="folk-pattern pattern-1"></div>
+    <div class="folk-pattern pattern-2"></div>
+    
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-crown"></i> لعبة الألغاز الشعبية المتطورة <i class="fas fa-crown"></i></h1>
+            <h1>🧩 لعبة الألغاز الشعبية المتطورة 🧩</h1>
             <p>تحدي الأذكياء والأذكياء فقط! اختر الوقت والفرق وواجه أسئلة صعبة</p>
         </div>
 
@@ -779,15 +659,13 @@
                 <button onclick="addPlayer()"><i class="fas fa-plus"></i> إضافة</button>
             </div>
             <div class="players-list" id="playersList"></div>
-            
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-            <div class="progress-text" id="progressText">أضف لاعبين لبدء اللعبة</div>
         </div>
 
+        <!-- رسالة خطأ -->
+        <div class="error-message" id="errorMessage"></div>
+
         <!-- بدء اللعبة -->
-        <button class="start-btn" id="startBtn" onclick="startGame()">
+        <button class="start-btn" id="startBtn" onclick="validateAndStartGame()">
             <i class="fas fa-play"></i> ابدأ اللعبة
         </button>
 
@@ -830,9 +708,6 @@
                 <button class="next-btn" id="nextBtn" onclick="nextPlayer()" style="display: none;">
                     <i class="fas fa-arrow-right"></i> التالي
                 </button>
-                <button class="skip-player-btn" onclick="skipPlayer()" style="display: none;">
-                    <i class="fas fa-user-slash"></i> تخطي اللاعب
-                </button>
             </div>
         </div>
 
@@ -862,50 +737,29 @@
         let timerInterval;
         let gameActive = false;
         const maxRounds = 10;
-        let confettiInterval;
 
         // مجموعة كبيرة من الألغاز الشعبية مع تصنيف الصعوبة
         const riddles = [
-            // أسئلة سهلة
             { question: "شيء له أوراق وليس بنبات، وله جلد وليس بحيوان، وعلم وليس بإنسان؟", answer: "الكتاب", difficulty: "easy" },
             { question: "يأكل ولا يشبع، ويشرب ولا يروى؟", answer: "النار", difficulty: "easy" },
             { question: "شيء كلما أخذت منه كبر؟", answer: "الحفرة", difficulty: "easy" },
             { question: "أسود عندما نشتريه، أحمر عندما نستعمله، وأبيض عندما نرميه؟", answer: "الفحم", difficulty: "easy" },
             { question: "ما هو الشيء الذي يخترق الزجاج ولا يكسره؟", answer: "الضوء", difficulty: "easy" },
-            
-            // أسئلة متوسطة
             { question: "شيء له عين ولا يرى، فما هو؟", answer: "الإبرة", difficulty: "medium" },
             { question: "شيء يسمع بلا أذن ويتكلم بلا لسان؟", answer: "التليفون", difficulty: "medium" },
             { question: "شيء يسير بلا رجلين ويبكي بلا عينين؟", answer: "السحاب", difficulty: "medium" },
             { question: "شيء كلما كثرت نقص، وكلما نقصت زادت؟", answer: "الحفرة", difficulty: "medium" },
             { question: "شيء يطير بلا أجنحة ويبكي بلا عيون؟", answer: "السحاب", difficulty: "medium" },
-            
-            // أسئلة صعبة
             { question: "شيء في السماء وليس في الماء، وفي القمر وليس في الشمس، وفي الليل وليس في النهار؟", answer: "حرف النون", difficulty: "hard" },
             { question: "شيء يكتب ولا يقرأ؟", answer: "القلم", difficulty: "hard" },
             { question: "شيء ينام ولا يستيقظ؟", answer: "الموتى", difficulty: "hard" },
             { question: "شيء يبدأ بالثاء وينتهي بالثاء، وليس فيه حرف الثاء؟", answer: "ثوب", difficulty: "hard" },
             { question: "شيء يتحرك حول البيت ولا يدخله؟", answer: "الجدار", difficulty: "hard" },
-            
-            // أسئلة صعبة جداً
             { question: "شيء له رأس وليس بعقل، وله لسان وليس بناطق؟", answer: "الإبرة", difficulty: "hard" },
             { question: "شيء له عين واحدة ولا يرى؟", answer: "الإبرة", difficulty: "hard" },
             { question: "شيء يموت إذا شرب الماء؟", answer: "النار", difficulty: "hard" },
             { question: "شيء يكسو الناس وهو عار؟", answer: "الإبرة", difficulty: "hard" },
-            { question: "شيء يدور على البيت ولا يدخله؟", answer: "الجدار", difficulty: "hard" },
-            { question: "شيء له أسنان ولا يعض؟", answer: "المشط", difficulty: "hard" },
-            { question: "شيء يطير من غير جناح، ويبكي من غير عين؟", answer: "السحاب", difficulty: "hard" },
-            { question: "شيء ينام ولا يستيقظ؟", answer: "الموتى", difficulty: "hard" },
-            { question: "شيء يذهب ولا يرجع؟", answer: "الدخان", difficulty: "hard" },
-            { question: "شيء كلما زاد نقص؟", answer: "العمر", difficulty: "hard" },
-            { question: "شيء لا يدخل إلا إذا ضرب على رأسه؟", answer: "المسمار", difficulty: "hard" },
-            { question: "شيء لا يؤكل في الليل؟", answer: "الفطور", difficulty: "hard" },
-            { question: "شيء يقرصك ولا تراه؟", answer: "الجوع", difficulty: "hard" },
-            { question: "شيء يطلبه الناس منك، وإذا أعطيته لهم هربت منهم؟", answer: "النصيحة", difficulty: "hard" },
-            { question: "شيء يسمع بلا أذن ويتكلم بلا لسان؟", answer: "صدى الصوت", difficulty: "hard" },
-            { question: "شيء يتحرك بدون أرجل ويصل بدون يدين؟", answer: "الصوت", difficulty: "hard" },
-            { question: "شيء كلما زاد قل؟", answer: "العمر", difficulty: "hard" },
-            { question: "شيء لا يبتل ولو دخل الماء؟", answer: "الضوء", difficulty: "hard" }
+            { question: "شيء يدور على البيت ولا يدخله؟", answer: "الجدار", difficulty: "hard" }
         ];
 
         // إعداد الأحداث
@@ -931,6 +785,9 @@
                     } else {
                         document.getElementById('teamNames').style.display = 'none';
                     }
+                    
+                    // تحديث حالة زر البدء
+                    updateStartButtonState();
                 });
             });
             
@@ -947,9 +804,6 @@
                     checkAnswer();
                 }
             });
-            
-            // تحديث شريط التقدم
-            updateProgressBar();
         });
 
         // إضافة لاعب جديد
@@ -961,30 +815,67 @@
                 updatePlayersList();
                 document.getElementById('playerName').value = '';
                 
-                if (players.length >= 2) {
-                    document.getElementById('startBtn').disabled = false;
-                }
+                updateStartButtonState();
             }
-            updateProgressBar();
         }
 
-        // تحديث شريط التقدم
-        function updateProgressBar() {
-            const progressBar = document.getElementById('progressBar');
-            const progressText = document.getElementById('progressText');
+        // تحديث حالة زر البدء
+        function updateStartButtonState() {
+            const startBtn = document.getElementById('startBtn');
+            const errorMessage = document.getElementById('errorMessage');
             
-            if (players.length === 0) {
-                progressBar.style.width = '0%';
-                progressText.textContent = 'أضف لاعبين لبدء اللعبة';
-            } else if (players.length === 1) {
-                progressBar.style.width = '30%';
-                progressBar.style.background = 'linear-gradient(to right, #FFA500, #FF4500)';
-                progressText.textContent = 'أضف لاعباً آخر لبدء اللعبة';
+            if (gameType === 'teams') {
+                const team1 = document.getElementById('team1Name').value.trim();
+                const team2 = document.getElementById('team2Name').value.trim();
+                
+                if (team1 && team2 && players.length >= 1) {
+                    startBtn.disabled = false;
+                    errorMessage.style.display = 'none';
+                } else {
+                    startBtn.disabled = true;
+                    errorMessage.textContent = 'الرجاء إدخال أسماء الفريقين وإضافة لاعبين';
+                    errorMessage.style.display = 'block';
+                }
             } else {
-                progressBar.style.width = '100%';
-                progressBar.style.background = 'linear-gradient(to right, #32CD32, #228B22)';
-                progressText.textContent = 'جاهز للبدء! اضغط على "ابدأ اللعبة"';
+                if (players.length >= 2) {
+                    startBtn.disabled = false;
+                    errorMessage.style.display = 'none';
+                } else {
+                    startBtn.disabled = true;
+                    errorMessage.textContent = 'الرجاء إضافة لاعبين على الأقل';
+                    errorMessage.style.display = 'block';
+                }
             }
+        }
+
+        // التحقق من الإعدادات وبدء اللعبة
+        function validateAndStartGame() {
+            const errorMessage = document.getElementById('errorMessage');
+            
+            if (gameType === 'teams') {
+                const team1 = document.getElementById('team1Name').value.trim();
+                const team2 = document.getElementById('team2Name').value.trim();
+                
+                if (!team1 || !team2) {
+                    errorMessage.textContent = 'الرجاء إدخال أسماء الفريقين';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+                
+                if (players.length < 1) {
+                    errorMessage.textContent = 'الرجاء إضافة لاعبين على الأقل';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+            } else {
+                if (players.length < 2) {
+                    errorMessage.textContent = 'الرجاء إضافة لاعبين على الأقل';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+            }
+            
+            startGame();
         }
 
         // تحديث قائمة اللاعبين
@@ -997,6 +888,8 @@
                 playerTag.innerHTML = `${index + 1}. ${player} <i class="fas fa-times" onclick="removePlayer('${player}')" style="cursor: pointer;"></i>`;
                 playersList.appendChild(playerTag);
             });
+            
+            updateStartButtonState();
         }
 
         // إزالة لاعب
@@ -1004,24 +897,17 @@
             players = players.filter(player => player !== playerName);
             delete scores[playerName];
             updatePlayersList();
-            updateProgressBar();
-            
-            if (players.length < 2) {
-                document.getElementById('startBtn').disabled = true;
-            }
         }
 
         // بدء اللعبة
         function startGame() {
+            // إخفاء رسالة الخطأ
+            document.getElementById('errorMessage').style.display = 'none';
+            
             // التحقق من إعداد الفرق
             if (gameType === 'teams') {
                 const team1 = document.getElementById('team1Name').value.trim();
                 const team2 = document.getElementById('team2Name').value.trim();
-                
-                if (!team1 || !team2) {
-                    alert('الرجاء إدخال أسماء الفريقين');
-                    return;
-                }
                 
                 teams = [team1, team2];
                 teamScores = {
@@ -1049,27 +935,6 @@
             updateDisplay();
             showCurrentRiddle();
             startTimer();
-            
-            // بدء المؤثرات
-            startConfetti();
-        }
-
-        // بدء مؤثرات الكونفيتي
-        function startConfetti() {
-            clearInterval(confettiInterval);
-            confettiInterval = setInterval(() => {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                document.body.appendChild(confetti);
-                
-                // إزالة الكونفيتي بعد انتهاء المؤثر
-                setTimeout(() => {
-                    confetti.remove();
-                }, 5000);
-            }, 100);
         }
 
         // خلط المصفوفة
@@ -1085,7 +950,6 @@
             timer = gameTime;
             updateTimerDisplay();
             
-            clearInterval(timerInterval);
             timerInterval = setInterval(() => {
                 timer--;
                 updateTimerDisplay();
@@ -1117,7 +981,6 @@
             document.getElementById('answerInput').disabled = true;
             document.querySelectorAll('.answer-btn').forEach(btn => btn.disabled = true);
             document.getElementById('nextBtn').style.display = 'block';
-            document.querySelector('.skip-player-btn').style.display = 'block';
             
             currentRiddleIndex++;
             
@@ -1224,7 +1087,6 @@
             document.getElementById('feedback').textContent = '';
             document.getElementById('feedback').className = '';
             document.getElementById('nextBtn').style.display = 'none';
-            document.querySelector('.skip-player-btn').style.display = 'none';
             document.getElementById('answerInput').disabled = false;
             document.querySelectorAll('.answer-btn').forEach(btn => btn.disabled = false);
             document.querySelector('.timer-container').style.animation = 'none';
@@ -1247,9 +1109,9 @@
                 
                 // إضافة النقاط
                 if (gameType === 'individual') {
-                    scores[players[currentPlayerIndex]] += 5;
+                    scores[players[currentPlayerIndex]]++;
                 } else {
-                    teamScores[teams[currentTeamIndex]] += 5;
+                    teamScores[teams[currentTeamIndex]]++;
                 }
             } else {
                 feedback.textContent = `❌ إجابة خاطئة! الإجابة الصحيحة: ${correctAnswer}`;
@@ -1259,7 +1121,6 @@
             document.getElementById('answerInput').disabled = true;
             document.querySelectorAll('.answer-btn').forEach(btn => btn.disabled = true);
             document.getElementById('nextBtn').style.display = 'block';
-            document.querySelector('.skip-player-btn').style.display = 'block';
             
             updateDisplay();
             currentRiddleIndex++;
@@ -1282,18 +1143,12 @@
             document.getElementById('answerInput').disabled = true;
             document.querySelectorAll('.answer-btn').forEach(btn => btn.disabled = true);
             document.getElementById('nextBtn').style.display = 'block';
-            document.querySelector('.skip-player-btn').style.display = 'block';
             
             currentRiddleIndex++;
             
             if (gameRounds >= maxRounds) {
                 setTimeout(endGame, 2000);
             }
-        }
-
-        // تخطي اللاعب
-        function skipPlayer() {
-            nextPlayer();
         }
 
         // اللاعب التالي
@@ -1322,7 +1177,6 @@
         function endGame() {
             gameActive = false;
             clearInterval(timerInterval);
-            clearInterval(confettiInterval);
             
             document.getElementById('gameSection').style.display = 'none';
             document.getElementById('gameOver').style.display = 'block';
@@ -1375,16 +1229,12 @@
                 `;
                 finalScoresContainer.appendChild(scoreDiv);
             });
-            
-            // مؤثرات النصر
-            startConfetti();
         }
 
         // إعادة بدء اللعبة
         function restartGame() {
             gameActive = false;
             clearInterval(timerInterval);
-            clearInterval(confettiInterval);
             
             players = [];
             teams = [];
@@ -1402,10 +1252,7 @@
             document.getElementById('playerName').value = '';
             document.getElementById('team1Name').value = '';
             document.getElementById('team2Name').value = '';
-            updateProgressBar();
-            
-            // إزالة الكونفيتي
-            document.querySelectorAll('.confetti').forEach(el => el.remove());
+            document.getElementById('errorMessage').style.display = 'none';
         }
     </script>
 </body>

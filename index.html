@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة الألغاز الشعبية</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #4a5568;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 1.2em;
+        }
+
+        .setup-section {
+            margin-bottom: 30px;
+        }
+
+        .player-setup {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .player-setup h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .player-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            justify-content: center;
+        }
+
+        .player-input input {
+            padding: 10px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            width: 200px;
+        }
+
+        .player-input button {
+            padding: 10px 20px;
+            background: #48bb78;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .player-input button:hover {
+            background: #38a169;
+            transform: translateY(-2px);
+        }
+
+        .players-list {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .player-tag {
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .start-btn {
+            background: #ed8936;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(237, 137, 54, 0.3);
+        }
+
+        .start-btn:hover {
+            background: #dd7a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(237, 137, 54, 0.4);
+        }
+
+        .start-btn:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .game-section {
+            display: none;
+        }
+
+        .scoreboard {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .scoreboard h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 10px 20px;
+            margin: 5px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .score-item.current-player {
+            background: #48bb78;
+            color: white;
+        }
+
+        .riddle-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .riddle-text {
+            font-size: 1.3em;
+            color: #2d3748;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .answer-section {
+            margin-bottom: 20px;
+        }
+
+        .answer-input {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 15px;
+        }
+
+        .answer-btn {
+            background: #4299e1;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+
+        .answer-btn:hover {
+            background: #3182ce;
+            transform: translateY(-2px);
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .feedback.correct {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .feedback.incorrect {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .next-btn {
+            background: #38a169;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .next-btn:hover {
+            background: #2f855a;
+            transform: translateY(-2px);
+        }
+
+        .game-over {
+            text-align: center;
+            padding: 30px;
+            background: #f7fafc;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .winner-announcement {
+            font-size: 2em;
+            color: #38a169;
+            margin-bottom: 20px;
+        }
+
+        .final-scores {
+            margin-top: 20px;
+        }
+
+        .restart-btn {
+            background: #667eea;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .restart-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .player-input {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .player-input input {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 لعبة الألغاز الشعبية 🎯</h1>
+            <p>أبنشدك عن كذا كذا...</p>
+        </div>
+
+        <div class="setup-section" id="setupSection">
+            <div class="player-setup">
+                <h3>🎮 إضافة اللاعبين</h3>
+                <div class="player-input">
+                    <input type="text" id="playerName" placeholder="اسم اللاعب" maxlength="20">
+                    <button onclick="addPlayer()">إضافة</button>
+                </div>
+                <div class="players-list" id="playersList"></div>
+            </div>
+            <button class="start-btn" id="startBtn" onclick="startGame()" disabled>🚀 ابدأ اللعبة</button>
+        </div>
+
+        <div class="game-section" id="gameSection">
+            <div class="scoreboard" id="scoreboard">
+                <h3>📊 النقاط</h3>
+                <div id="scoresContainer"></div>
+            </div>
+
+            <div class="riddle-box">
+                <div class="riddle-text" id="riddleText"></div>
+                <div class="answer-section">
+                    <input type="text" class="answer-input" id="answerInput" placeholder="اكتب الإجابة هنا...">
+                    <br>
+                    <button class="answer-btn" onclick="checkAnswer()">✅ تأكيد الإجابة</button>
+                    <button class="answer-btn" onclick="skipRiddle()">⏭️ تخطي</button>
+                </div>
+                <div class="feedback" id="feedback"></div>
+                <button class="next-btn" id="nextBtn" onclick="nextPlayer()" style="display: none;">⏭️ اللاعب التالي</button>
+            </div>
+        </div>
+
+        <div class="game-over" id="gameOver" style="display: none;">
+            <div class="winner-announcement" id="winnerText"></div>
+            <div class="final-scores" id="finalScores"></div>
+            <button class="restart-btn" onclick="restartGame()">🔄 لعبة جديدة</button>
+        </div>
+    </div>
+
+    <script>
+        // بيانات اللعبة
+        let players = [];
+        let currentPlayerIndex = 0;
+        let scores = {};
+        let currentRiddleIndex = 0;
+        let gameRounds = 0;
+        const maxRounds = 10;
+
+        // مجموعة الألغاز الشعبية
+        const riddles = [
+            {
+                question: "أبنشدك عن بيت له باب واحد، وله مية باب وله ألف باب، وله ألف ألف باب، وما يدخله إلا الطيب",
+                answer: "المسجد"
+            },
+            {
+                question: "أبنشدك عن شيء أبيض كالثلج، أسود كالليل، أحمر كالدم، أصفر كالذهب",
+                answer: "الكتاب"
+            },
+            {
+                question: "أبنشدك عن شيء يمشي وما له رجلين، ويطير وما له جناحين، ويسمع وما له أذنين",
+                answer: "الصوت"
+            },
+            {
+                question: "أبنشدك عن شيء كل يوم يكبر، وكل سنة يصغر",
+                answer: "العمر"
+            },
+            {
+                question: "أبنشدك عن شيء له عيون وما يشوف، وله رقبة وما له رأس",
+                answer: "الإبريق"
+            },
+            {
+                question: "أبنشدك عن شيء يقرص وما له أسنان، ويعض وما له فم",
+                answer: "البرد"
+            },
+            {
+                question: "أبنشدك عن شيء إذا أكلته كله تموت، وإذا أكلت نصه تعيش",
+                answer: "السمسم"
+            },
+            {
+                question: "أبنشدك عن شيء يسقط وما يتكسر، ويتكسر وما يسقط",
+                answer: "الثلج"
+            },
+            {
+                question: "أبنشدك عن شيء له جسم وما له روح، وله صوت وما له فم",
+                answer: "الجرس"
+            },
+            {
+                question: "أبنشدك عن شيء كلما زاد نقص، وكلما نقص زاد",
+                answer: "الحفرة"
+            },
+            {
+                question: "أبنشدك عن شيء يولد في البحر ويموت في البر",
+                answer: "الملح"
+            },
+            {
+                question: "أبنشدك عن شيء أسود وأبيض وأحمر في كل مكان",
+                answer: "الجريدة"
+            },
+            {
+                question: "أبنشدك عن شيء له رأس وما له شعر، وله عيون وما يبصر",
+                answer: "الإبرة"
+            },
+            {
+                question: "أبنشدك عن شيء يدور حول البيت وما يدخله",
+                answer: "الطريق"
+            },
+            {
+                question: "أبنشدك عن شيء كل الناس يحتاجونه، وإذا جاء تركوه",
+                answer: "النوم"
+            },
+            {
+                question: "أبنشدك عن شيء يضرب وما يبكي، ويقطع وما يصيح",
+                answer: "الطبل"
+            },
+            {
+                question: "أبنشدك عن شيء يأكل وما يشبع، ويشرب وما يروى",
+                answer: "النار"
+            },
+            {
+                question: "أبنشدك عن شيء له أسنان وما يعض، وله لسان وما يتكلم",
+                answer: "الحذاء"
+            },
+            {
+                question: "أبنشدك عن شيء يجري وما يمل، ويسقط وما يتعب",
+                answer: "المطر"
+            },
+            {
+                question: "أبنشدك عن شيء يقف في الحر وما يعرق، ويقف في البرد وما يرجف",
+                answer: "الشجرة"
+            },
+            {
+                question: "أبنشدك عن شيء كله ثقوب وما ينقط منه شيء",
+                answer: "الإسفنج"
+            },
+            {
+                question: "أبنشدك عن شيء يحمل الثقيل وما يحمل المسمار",
+                answer: "البحر"
+            },
+            {
+                question: "أبنشدك عن شيء يغسل وجهه بلسانه",
+                answer: "القطة"
+            },
+            {
+                question: "أبنشدك عن شيء كلما أخذت منه كبر",
+                answer: "الحفرة"
+            },
+            {
+                question: "أبنشدك عن شيء يسير بلا أرجل، ويبكي بلا عيون",
+                answer: "السحاب"
+            },
+            {
+                question: "أبنشدك عن شيء يطعم الناس وما يأكل",
+                answer: "الطاولة"
+            },
+            {
+                question: "أبنشدك عن شيء يقطع الحديد وما يقطع الورق",
+                answer: "المقص"
+            },
+            {
+                question: "أبنشدك عن شيء يحرق وما يحترق",
+                answer: "الشمس"
+            },
+            {
+                question: "أبنشدك عن شيء يعيش في الماء وما يشرب",
+                answer: "السمك"
+            },
+            {
+                question: "أبنشدك عن شيء يضيء الطريق وما يشوف",
+                answer: "المصباح"
+            }
+        ];
+
+        // إضافة لاعب جديد
+        function addPlayer() {
+            const playerName = document.getElementById('playerName').value.trim();
+            if (playerName && !players.includes(playerName)) {
+                players.push(playerName);
+                scores[playerName] = 0;
+                updatePlayersList();
+                document.getElementById('playerName').value = '';
+                
+                if (players.length >= 2) {
+                    document.getElementById('startBtn').disabled = false;
+                }
+            }
+        }
+
+        // تحديث قائمة اللاعبين
+        function updatePlayersList() {
+            const playersList = document.getElementById('playersList');
+            playersList.innerHTML = '';
+            players.forEach((player, index) => {
+                const playerTag = document.createElement('div');
+                playerTag.className = 'player-tag';
+                playerTag.innerHTML = `${index + 1}. ${player} <span onclick="removePlayer('${player}')" style="cursor: pointer; margin-right: 10px;">❌</span>`;
+                playersList.appendChild(playerTag);
+            });
+        }
+
+        // إزالة لاعب
+        function removePlayer(playerName) {
+            players = players.filter(player => player !== playerName);
+            delete scores[playerName];
+            updatePlayersList();
+            
+            if (players.length < 2) {
+                document.getElementById('startBtn').disabled = true;
+            }
+        }
+
+        // بدء اللعبة
+        function startGame() {
+            document.getElementById('setupSection').style.display = 'none';
+            document.getElementById('gameSection').style.display = 'block';
+            
+            currentPlayerIndex = 0;
+            gameRounds = 0;
+            currentRiddleIndex = 0;
+            
+            // خلط الألغاز
+            shuffleArray(riddles);
+            
+            updateScoreboard();
+            showCurrentRiddle();
+        }
+
+        // خلط المصفوفة
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // تحديث لوحة النقاط
+        function updateScoreboard() {
+            const scoresContainer = document.getElementById('scoresContainer');
+            scoresContainer.innerHTML = '';
+            
+            players.forEach((player, index) => {
+                const scoreItem = document.createElement('div');
+                scoreItem.className = 'score-item';
+                if (index === currentPlayerIndex) {
+                    scoreItem.classList.add('current-player');
+                }
+                scoreItem.innerHTML = `<span>${player}</span> <span>${scores[player]} نقطة</span>`;
+                scoresContainer.appendChild(scoreItem);
+            });
+        }
+
+        // عرض اللغز الحالي
+        function showCurrentRiddle() {
+            if (currentRiddleIndex >= riddles.length) {
+                currentRiddleIndex = 0;
+                shuffleArray(riddles);
+            }
+            
+            const riddle = riddles[currentRiddleIndex];
+            document.getElementById('riddleText').textContent = riddle.question;
+            document.getElementById('answerInput').value = '';
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('answerInput').disabled = false;
+            document.querySelector('.answer-btn').disabled = false;
+        }
+
+        // فحص الإجابة
+        function checkAnswer() {
+            const userAnswer = document.getElementById('answerInput').value.trim();
+            const correctAnswer = riddles[currentRiddleIndex].answer;
+            const feedback = document.getElementById('feedback');
+            
+            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                feedback.textContent = `🎉 إجابة صحيحة! ${players[currentPlayerIndex]} حصل على نقطة!`;
+                feedback.className = 'feedback correct';
+                scores[players[currentPlayerIndex]]++;
+            } else {
+                feedback.textContent = `❌ إجابة خاطئة! الإجابة الصحيحة هي: ${correctAnswer}`;
+                feedback.className = 'feedback incorrect';
+            }
+            
+            document.getElementById('answerInput').disabled = true;
+            document.querySelector('.answer-btn').disabled = true;
+            document.getElementById('nextBtn').style.display = 'inline-block';
+            
+            updateScoreboard();
+            currentRiddleIndex++;
+            
+            // فحص انتهاء اللعبة
+            if (gameRounds >= maxRounds) {
+                setTimeout(endGame, 2000);
+            }
+        }
+
+        // تخطي اللغز
+        function skipRiddle() {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = `⏭️ تم تخطي اللغز! الإجابة كانت: ${riddles[currentRiddleIndex].answer}`;
+            feedback.className = 'feedback incorrect';
+            
+            document.getElementById('answerInput').disabled = true;
+            document.querySelector('.answer-btn').disabled = true;
+            document.getElementById('nextBtn').style.display = 'inline-block';
+            
+            currentRiddleIndex++;
+            
+            if (gameRounds >= maxRounds) {
+                setTimeout(endGame, 2000);
+            }
+        }
+
+        // اللاعب التالي
+        function nextPlayer() {
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+            if (currentPlayerIndex === 0) {
+                gameRounds++;
+            }
+            
+            if (gameRounds < maxRounds) {
+                updateScoreboard();
+                showCurrentRiddle();
+            } else {
+                endGame();
+            }
+        }
+
+        // انتهاء اللعبة
+        function endGame() {
+            document.getElementById('gameSection').style.display = 'none';
+            document.getElementById('gameOver').style.display = 'block';
+            
+            // العثور على الفائز
+            let winner = '';
+            let maxScore = -1;
+            
+            for (const player in scores) {
+                if (scores[player] > maxScore) {
+                    maxScore = scores[player];
+                    winner = player;
+                }
+            }
+            
+            document.getElementById('winnerText').textContent = `🏆 الفائز: ${winner} بـ ${maxScore} نقطة!`;
+            
+            // عرض النتائج النهائية
+            const finalScoresContainer = document.getElementById('finalScores');
+            finalScoresContainer.innerHTML = '<h3>النتائج النهائية:</h3>';
+            
+            const sortedPlayers = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            sortedPlayers.forEach(([player, score], index) => {
+                const scoreDiv = document.createElement('div');
+                scoreDiv.className = 'score-item';
+                scoreDiv.innerHTML = `<span>${index + 1}. ${player}</span> <span>${score} نقطة</span>`;
+                finalScoresContainer.appendChild(scoreDiv);
+            });
+        }
+
+        // إعادة بدء اللعبة
+        function restartGame() {
+            players = [];
+            scores = {};
+            currentPlayerIndex = 0;
+            currentRiddleIndex = 0;
+            gameRounds = 0;
+            
+            document.getElementById('gameOver').style.display = 'none';
+            document.getElementById('setupSection').style.display = 'block';
+            document.getElementById('playersList').innerHTML = '';
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('playerName').value = '';
+        }
+
+        // إضافة مستمع للضغط على Enter
+        document.getElementById('playerName').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addPlayer();
+            }
+        });
+
+        document.getElementById('answerInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+    </script>
+</body>
+</html>

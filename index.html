@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة الألغاز الشعبية المتطورة - نظام الفرق</title>
+    <title>لعبة الألغاز الشعبية المتطورة - نظام الفرق الذكي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -45,21 +45,24 @@
         }
 
         .header h1 {
-            color: #8b4513;
+            color: #ffd700;
             font-size: 3.5rem;
             margin-bottom: 15px;
             font-weight: 900;
-            text-shadow: 2px 2px 0 #ffd700;
+            text-shadow: 3px 3px 0 #8b4513;
             letter-spacing: 1px;
         }
 
         .header p {
-            color: #a52a2a;
+            color: #fff;
             font-size: 1.6rem;
             font-weight: 700;
             max-width: 900px;
             margin: 0 auto;
             line-height: 1.6;
+            background: rgba(139, 69, 19, 0.7);
+            padding: 10px;
+            border-radius: 10px;
         }
 
         /* أنماط الزخرفة الشعبية */
@@ -75,7 +78,7 @@
         .pattern-1 {
             top: 20px;
             left: 20px;
-            background: radial-gradient(circle, #8b4513 15%, transparent 15%);
+            background: radial-gradient(circle, #ffd700 15%, transparent 15%);
         }
 
         .pattern-2 {
@@ -658,6 +661,92 @@
         .pulse {
             animation: pulse 1s infinite;
         }
+        
+        /* نظام الفريق الذكي */
+        .team-player-assignment {
+            display: none;
+            margin-top: 20px;
+            background: rgba(255, 249, 230, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px dashed #d4a017;
+        }
+        
+        .team-player-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .team-box {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            border: 3px solid;
+            min-width: 200px;
+        }
+        
+        .team1-box {
+            border-color: #0066cc;
+        }
+        
+        .team2-box {
+            border-color: #cc8400;
+        }
+        
+        .team-box h4 {
+            margin-bottom: 10px;
+            color: #8b4513;
+            font-size: 1.3rem;
+        }
+        
+        .player-item {
+            padding: 8px;
+            background: #ffecd9;
+            margin: 5px 0;
+            border-radius: 8px;
+            cursor: move;
+            border: 2px solid #d4a017;
+        }
+        
+        .player-item:hover {
+            background: #ffd700;
+        }
+        
+        .team-player-controls {
+            margin-top: 20px;
+        }
+        
+        .team-player-controls button {
+            padding: 10px 20px;
+            background: linear-gradient(to bottom, #4da6ff, #0066cc);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0 10px;
+            box-shadow: 0 4px 0 #003366;
+        }
+        
+        .team-player-controls button:hover {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #003366;
+        }
+        
+        /* التألق عند التحديث */
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px #ffd700; }
+            50% { box-shadow: 0 0 20px #ffd700; }
+            100% { box-shadow: 0 0 5px #ffd700; }
+        }
+        
+        .glowing {
+            animation: glow 2s infinite;
+        }
     </style>
 </head>
 <body>
@@ -666,7 +755,7 @@
     
     <div class="container">
         <div class="header">
-            <h1>🧩 لعبة الألغاز الشعبية المتطورة - نظام الفرق 🧩</h1>
+            <h1>🧩 لعبة الألغاز الشعبية المتطورة - نظام الفرق الذكي 🧩</h1>
             <p>تحدي الأذكياء والأذكياء فقط! اختر الوقت والفرق وواجه أسئلة صعبة</p>
         </div>
 
@@ -686,33 +775,45 @@
             <div class="section">
                 <h3><i class="fas fa-users"></i> طريقة اللعب</h3>
                 <div class="team-options">
-                    <div class="team-option active" data-type="individual">لعب فردي</div>
-                    <div class="team-option" data-type="teams">لعب جماعي (فرق)</div>
+                    <div class="team-option" data-type="individual">لعب فردي</div>
+                    <div class="team-option active" data-type="teams">لعب جماعي (فرق)</div>
                     
                     <div class="team-names" id="teamNames">
                         <div class="team-input">
-                            <input type="text" id="team1Name" placeholder="اسم الفريق الأول (مثال: الزعيم)" maxlength="20" oninput="updateStartButtonState()">
+                            <input type="text" id="team1Name" placeholder="اسم الفريق الأول (مثال: الزعيم)" maxlength="20" value="الزعيم" oninput="updateStartButtonState()">
                         </div>
                         <div class="team-input">
-                            <input type="text" id="team2Name" placeholder="اسم الفريق الثاني (مثال: الكبير)" maxlength="20" oninput="updateStartButtonState()">
+                            <input type="text" id="team2Name" placeholder="اسم الفريق الثاني (مثال: الكبير)" maxlength="20" value="الكبير" oninput="updateStartButtonState()">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- قسم اللاعبين -->
-        <div class="section player-setup">
-            <h3><i class="fas fa-user-plus"></i> إضافة اللاعبين</h3>
-            <div class="player-input">
-                <input type="text" id="playerName" placeholder="اسم اللاعب" maxlength="20" onkeypress="if(event.key === 'Enter') addPlayer()">
-                <button onclick="addPlayer()"><i class="fas fa-plus"></i> إضافة</button>
+        <!-- نظام توزيع اللاعبين على الفرق -->
+        <div class="team-player-assignment" id="teamPlayerAssignment">
+            <h3><i class="fas fa-user-friends"></i> توزيع اللاعبين على الفرق</h3>
+            <div class="team-player-list">
+                <div class="team-box team1-box">
+                    <h4 id="team1Title">الزعيم</h4>
+                    <div id="team1Players" class="team-players">
+                        <!-- سيتم إضافة اللاعبين هنا -->
+                    </div>
+                </div>
+                
+                <div class="team-box team2-box">
+                    <h4 id="team2Title">الكبير</h4>
+                    <div id="team2Players" class="team-players">
+                        <!-- سيتم إضافة اللاعبين هنا -->
+                    </div>
+                </div>
             </div>
-            <div class="players-list" id="playersList"></div>
+            
+            <div class="team-player-controls">
+                <button onclick="assignPlayersRandomly()"><i class="fas fa-random"></i> توزيع عشوائي</button>
+                <button onclick="assignPlayersManually()"><i class="fas fa-check"></i> تأكيد التوزيع</button>
+            </div>
         </div>
-
-        <!-- رسالة خطأ -->
-        <div class="error-message" id="errorMessage"></div>
 
         <!-- بدء اللعبة -->
         <button class="start-btn" id="startBtn" onclick="validateAndStartGame()">
@@ -722,7 +823,7 @@
         <!-- قسم اللعبة -->
         <div class="game-section" id="gameSection">
             <div class="game-header">
-                <div class="team-display" id="teamDisplay">اللاعب: محمد</div>
+                <div class="team-display" id="teamDisplay">الفريق: الزعيم</div>
                 <div class="timer-container">
                     <div class="timer-display" id="timerDisplay">60</div>
                 </div>
@@ -730,7 +831,7 @@
 
             <div class="game-board">
                 <div class="scoreboard" id="scoreboard">
-                    <h3><i class="fas fa-users"></i> اللاعبون</h3>
+                    <h3><i class="fas fa-users"></i> الفرق</h3>
                     <div id="scoresContainer"></div>
                 </div>
                 
@@ -742,7 +843,7 @@
 
             <div class="riddle-box">
                 <div class="difficulty-tag hard">صعب جداً</div>
-                <div class="riddle-text" id="riddleText"></div>
+                <div class="riddle-text" id="riddleText">ما هو الشيء الذي يطير بلا أجنحة ويبكي بلا عيون؟</div>
                 <div class="answer-section">
                     <input type="text" class="answer-input" id="answerInput" placeholder="اكتب الإجابة هنا..." onkeypress="if(event.key === 'Enter') checkAnswer()">
                     <div class="answer-buttons">
@@ -763,8 +864,17 @@
 
         <!-- نهاية اللعبة -->
         <div class="game-over" id="gameOver">
-            <div class="winner-announcement" id="winnerText"></div>
-            <div class="final-scores" id="finalScores"></div>
+            <div class="winner-announcement" id="winnerText">الفريق الفائز: الزعيم 🏆</div>
+            <div class="final-scores" id="finalScores">
+                <div class="leader-item top-player">
+                    <span>🥇 1. الزعيم</span>
+                    <span>8 نقطة</span>
+                </div>
+                <div class="leader-item top-player">
+                    <span>🥈 2. الكبير</span>
+                    <span>5 نقطة</span>
+                </div>
+            </div>
             <button class="restart-btn" onclick="restartGame()">
                 <i class="fas fa-redo"></i> لعب مرة أخرى
             </button>
@@ -773,16 +883,27 @@
 
     <script>
         // بيانات اللعبة
-        let players = [];
-        let teams = [];
-        let scores = {};
-        let teamScores = {};
-        let currentPlayerIndex = 0;
+        let players = ["أحمد", "محمد", "علي", "فاطمة"];
+        let teams = ["الزعيم", "الكبير"];
+        let teamPlayers = {
+            "الزعيم": ["أحمد", "محمد"],
+            "الكبير": ["علي", "فاطمة"]
+        };
+        let scores = {
+            "أحمد": 0,
+            "محمد": 0,
+            "علي": 0,
+            "فاطمة": 0
+        };
+        let teamScores = {
+            "الزعيم": 0,
+            "الكبير": 0
+        };
         let currentTeamIndex = 0;
         let currentRiddleIndex = 0;
         let gameRounds = 0;
         let gameTime = 60;
-        let gameType = 'individual'; // 'individual' أو 'teams'
+        let gameType = 'teams';
         let timer = gameTime;
         let timerInterval;
         let gameActive = false;
@@ -832,28 +953,21 @@
                     
                     if (gameType === 'teams') {
                         document.getElementById('teamNames').style.display = 'block';
+                        document.getElementById('teamPlayerAssignment').style.display = 'block';
                     } else {
                         document.getElementById('teamNames').style.display = 'none';
+                        document.getElementById('teamPlayerAssignment').style.display = 'none';
                     }
                     
                     // تحديث حالة زر البدء
                     updateStartButtonState();
                 });
             });
+            
+            // تهيئة واجهة التوزيع
+            assignPlayersRandomly();
+            updateTeamPlayersDisplay();
         });
-
-        // إضافة لاعب جديد
-        function addPlayer() {
-            const playerName = document.getElementById('playerName').value.trim();
-            if (playerName && !players.includes(playerName)) {
-                players.push(playerName);
-                scores[playerName] = 0;
-                updatePlayersList();
-                document.getElementById('playerName').value = '';
-                
-                updateStartButtonState();
-            }
-        }
 
         // تحديث حالة زر البدء
         function updateStartButtonState() {
@@ -864,12 +978,12 @@
                 const team1 = document.getElementById('team1Name').value.trim();
                 const team2 = document.getElementById('team2Name').value.trim();
                 
-                if (team1 && team2 && players.length >= 1) {
+                if (team1 && team2) {
                     startBtn.disabled = false;
                     errorMessage.style.display = 'none';
                 } else {
                     startBtn.disabled = true;
-                    errorMessage.textContent = 'الرجاء إدخال أسماء الفريقين وإضافة لاعبين على الأقل';
+                    errorMessage.textContent = 'الرجاء إدخال أسماء الفريقين';
                     errorMessage.style.display = 'block';
                 }
             } else {
@@ -898,18 +1012,15 @@
                     return;
                 }
                 
-                if (players.length < 1) {
-                    errorMessage.textContent = 'الرجاء إضافة لاعبين على الأقل';
-                    errorMessage.style.display = 'block';
-                    return;
-                }
-                
                 // حفظ أسماء الفرق
                 teams = [team1, team2];
                 teamScores = {
                     [team1]: 0,
                     [team2]: 0
                 };
+                
+                // إخفاء رسالة الخطأ
+                errorMessage.style.display = 'none';
             } else {
                 if (players.length < 2) {
                     errorMessage.textContent = 'الرجاء إضافة لاعبين على الأقل';
@@ -921,25 +1032,102 @@
             startGame();
         }
 
-        // تحديث قائمة اللاعبين
-        function updatePlayersList() {
-            const playersList = document.getElementById('playersList');
-            playersList.innerHTML = '';
-            players.forEach((player, index) => {
-                const playerTag = document.createElement('div');
-                playerTag.className = 'player-tag';
-                playerTag.innerHTML = `${index + 1}. ${player} <i class="fas fa-times" onclick="removePlayer('${player}')" style="cursor: pointer;"></i>`;
-                playersList.appendChild(playerTag);
-            });
+        // توزيع اللاعبين عشوائياً على الفرق
+        function assignPlayersRandomly() {
+            const shuffledPlayers = [...players].sort(() => Math.random() - 0.5);
+            const half = Math.ceil(shuffledPlayers.length / 2);
             
-            updateStartButtonState();
+            teamPlayers = {
+                [teams[0]]: shuffledPlayers.slice(0, half),
+                [teams[1]]: shuffledPlayers.slice(half)
+            };
+            
+            updateTeamPlayersDisplay();
         }
 
-        // إزالة لاعب
-        function removePlayer(playerName) {
-            players = players.filter(player => player !== playerName);
-            delete scores[playerName];
-            updatePlayersList();
+        // تحديث عرض توزيع اللاعبين على الفرق
+        function updateTeamPlayersDisplay() {
+            const team1PlayersDiv = document.getElementById('team1Players');
+            const team2PlayersDiv = document.getElementById('team2Players');
+            const team1Title = document.getElementById('team1Title');
+            const team2Title = document.getElementById('team2Title');
+            
+            team1Title.textContent = teams[0];
+            team2Title.textContent = teams[1];
+            
+            team1PlayersDiv.innerHTML = '';
+            team2PlayersDiv.innerHTML = '';
+            
+            teamPlayers[teams[0]].forEach(player => {
+                const playerDiv = document.createElement('div');
+                playerDiv.className = 'player-item';
+                playerDiv.textContent = player;
+                playerDiv.draggable = true;
+                playerDiv.setAttribute('data-player', player);
+                playerDiv.setAttribute('data-team', teams[0]);
+                team1PlayersDiv.appendChild(playerDiv);
+            });
+            
+            teamPlayers[teams[1]].forEach(player => {
+                const playerDiv = document.createElement('div');
+                playerDiv.className = 'player-item';
+                playerDiv.textContent = player;
+                playerDiv.draggable = true;
+                playerDiv.setAttribute('data-player', player);
+                playerDiv.setAttribute('data-team', teams[1]);
+                team2PlayersDiv.appendChild(playerDiv);
+            });
+            
+            // جعل العناصر قابلة للسحب والإفلات
+            initDragAndDrop();
+        }
+
+        // تهيئة نظام السحب والإفلات
+        function initDragAndDrop() {
+            const playerItems = document.querySelectorAll('.player-item');
+            
+            playerItems.forEach(item => {
+                item.addEventListener('dragstart', dragStart);
+                item.addEventListener('dragover', dragOver);
+                item.addEventListener('drop', drop);
+                item.addEventListener('dragenter', dragEnter);
+                item.addEventListener('dragleave', dragLeave);
+            });
+        }
+
+        function dragStart(e) {
+            e.dataTransfer.setData('text/plain', e.target.getAttribute('data-player') + ',' + e.target.getAttribute('data-team'));
+            setTimeout(() => e.target.classList.add('glowing'), 0);
+        }
+
+        function dragOver(e) {
+            e.preventDefault();
+        }
+
+        function dragEnter(e) {
+            e.preventDefault();
+            e.target.classList.add('glowing');
+        }
+
+        function dragLeave(e) {
+            e.target.classList.remove('glowing');
+        }
+
+        function drop(e) {
+            e.preventDefault();
+            e.target.classList.remove('glowing');
+            
+            const data = e.dataTransfer.getData('text/plain').split(',');
+            const player = data[0];
+            const fromTeam = data[1];
+            const toTeam = e.target.closest('.team-box').id === 'team1Players' ? teams[0] : teams[1];
+            
+            if (fromTeam !== toTeam) {
+                // نقل اللاعب من فريق إلى آخر
+                teamPlayers[fromTeam] = teamPlayers[fromTeam].filter(p => p !== player);
+                teamPlayers[toTeam].push(player);
+                updateTeamPlayersDisplay();
+            }
         }
 
         // بدء اللعبة
@@ -948,13 +1136,12 @@
             document.getElementById('errorMessage').style.display = 'none';
             
             // إخفاء واجهة الإعداد وإظهار واجهة اللعبة
-            document.querySelector('.player-setup').style.display = 'none';
             document.querySelector('.game-sections').style.display = 'none';
+            document.getElementById('teamPlayerAssignment').style.display = 'none';
             document.getElementById('startBtn').style.display = 'none';
             document.getElementById('gameSection').style.display = 'block';
             
             // إعادة تعيين المتغيرات
-            currentPlayerIndex = 0;
             currentTeamIndex = 0;
             currentRiddleIndex = 0;
             gameRounds = 0;
@@ -1024,12 +1211,8 @@
 
         // تحديث العرض
         function updateDisplay() {
-            // تحديث اسم اللاعب أو الفريق الحالي
-            if (gameType === 'individual') {
-                document.getElementById('teamDisplay').textContent = `اللاعب: ${players[currentPlayerIndex]}`;
-            } else {
-                document.getElementById('teamDisplay').textContent = `الفريق: ${teams[currentTeamIndex]}`;
-            }
+            // تحديث اسم الفريق الحالي
+            document.getElementById('teamDisplay').textContent = `الفريق: ${teams[currentTeamIndex]}`;
             
             // تحديث لوحة النقاط
             updateScoreboard();
@@ -1043,27 +1226,15 @@
             const scoresContainer = document.getElementById('scoresContainer');
             scoresContainer.innerHTML = '';
             
-            if (gameType === 'individual') {
-                players.forEach((player, index) => {
-                    const scoreItem = document.createElement('div');
-                    scoreItem.className = 'score-item';
-                    if (index === currentPlayerIndex) {
-                        scoreItem.classList.add('current-player');
-                    }
-                    scoreItem.innerHTML = `<span>${player}</span> <span>${scores[player]} نقطة</span>`;
-                    scoresContainer.appendChild(scoreItem);
-                });
-            } else {
-                teams.forEach((team, index) => {
-                    const scoreItem = document.createElement('div');
-                    scoreItem.className = 'score-item';
-                    if (index === currentTeamIndex) {
-                        scoreItem.classList.add('current-player');
-                    }
-                    scoreItem.innerHTML = `<span>${team}</span> <span>${teamScores[team]} نقطة</span>`;
-                    scoresContainer.appendChild(scoreItem);
-                });
-            }
+            teams.forEach((team, index) => {
+                const scoreItem = document.createElement('div');
+                scoreItem.className = 'score-item';
+                if (index === currentTeamIndex) {
+                    scoreItem.classList.add('current-player');
+                }
+                scoreItem.innerHTML = `<span>${team}</span> <span>${teamScores[team]} نقطة</span>`;
+                scoresContainer.appendChild(scoreItem);
+            });
         }
 
         // تحديث لوحة الترتيب
@@ -1071,14 +1242,8 @@
             const leaderboardList = document.getElementById('leaderboardList');
             leaderboardList.innerHTML = '';
             
-            // ترتيب اللاعبين أو الفرق حسب النقاط
-            let sortedItems;
-            
-            if (gameType === 'individual') {
-                sortedItems = [...players].sort((a, b) => scores[b] - scores[a]);
-            } else {
-                sortedItems = [...teams].sort((a, b) => teamScores[b] - teamScores[a]);
-            }
+            // ترتيب الفرق حسب النقاط
+            let sortedItems = [...teams].sort((a, b) => teamScores[b] - teamScores[a]);
             
             sortedItems.forEach((item, index) => {
                 const leaderItem = document.createElement('div');
@@ -1092,11 +1257,9 @@
                 else if (index === 1) rankSymbol = '🥈';
                 else if (index === 2) rankSymbol = '🥉';
                 
-                const points = gameType === 'individual' ? scores[item] : teamScores[item];
-                
                 leaderItem.innerHTML = `
                     <span>${rankSymbol} ${index + 1}. ${item}</span>
-                    <span>${points} نقطة</span>
+                    <span>${teamScores[item]} نقطة</span>
                 `;
                 leaderboardList.appendChild(leaderItem);
             });
@@ -1140,12 +1303,8 @@
                 feedback.textContent = `🎉 إجابة صحيحة!`;
                 feedback.className = 'feedback correct';
                 
-                // إضافة النقاط
-                if (gameType === 'individual') {
-                    scores[players[currentPlayerIndex]]++;
-                } else {
-                    teamScores[teams[currentTeamIndex]]++;
-                }
+                // إضافة النقاط للفريق
+                teamScores[teams[currentTeamIndex]]++;
             } else {
                 feedback.textContent = `❌ إجابة خاطئة! الإجابة الصحيحة: ${correctAnswer}`;
                 feedback.className = 'feedback incorrect';
@@ -1184,18 +1343,11 @@
             }
         }
 
-        // اللاعب التالي
+        // الفريق التالي
         function nextPlayer() {
-            if (gameType === 'individual') {
-                currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-                if (currentPlayerIndex === 0) {
-                    gameRounds++;
-                }
-            } else {
-                currentTeamIndex = (currentTeamIndex + 1) % teams.length;
-                if (currentTeamIndex === 0) {
-                    gameRounds++;
-                }
+            currentTeamIndex = (currentTeamIndex + 1) % teams.length;
+            if (currentTeamIndex === 0) {
+                gameRounds++;
             }
             
             if (gameRounds < maxRounds) {
@@ -1218,36 +1370,21 @@
             let winner = '';
             let maxScore = -1;
             
-            if (gameType === 'individual') {
-                for (const player in scores) {
-                    if (scores[player] > maxScore) {
-                        maxScore = scores[player];
-                        winner = player;
-                    }
+            for (const team in teamScores) {
+                if (teamScores[team] > maxScore) {
+                    maxScore = teamScores[team];
+                    winner = team;
                 }
-                document.getElementById('winnerText').textContent = `الفائز: ${winner} 🏆`;
-            } else {
-                for (const team in teamScores) {
-                    if (teamScores[team] > maxScore) {
-                        maxScore = teamScores[team];
-                        winner = team;
-                    }
-                }
-                document.getElementById('winnerText').textContent = `الفريق الفائز: ${winner} 🏆`;
             }
+            document.getElementById('winnerText').textContent = `الفريق الفائز: ${winner} 🏆`;
             
             // عرض النتائج النهائية
             const finalScoresContainer = document.getElementById('finalScores');
             finalScoresContainer.innerHTML = '<h3>النتائج النهائية:</h3>';
             
-            let sortedItems;
-            if (gameType === 'individual') {
-                sortedItems = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-            } else {
-                sortedItems = Object.entries(teamScores).sort((a, b) => b[1] - a[1]);
-            }
+            let sortedItems = Object.entries(teamScores).sort((a, b) => b[1] - a[1]);
             
-            sortedItems.forEach(([item, score], index) => {
+            sortedItems.forEach(([team, score], index) => {
                 const scoreDiv = document.createElement('div');
                 scoreDiv.className = 'leader-item top-player';
                 
@@ -1257,7 +1394,7 @@
                 else if (index === 2) rankSymbol = '🥉';
                 
                 scoreDiv.innerHTML = `
-                    <span>${rankSymbol} ${index + 1}. ${item}</span>
+                    <span>${rankSymbol} ${index + 1}. ${team}</span>
                     <span>${score} نقطة</span>
                 `;
                 finalScoresContainer.appendChild(scoreDiv);
@@ -1269,25 +1406,18 @@
             gameActive = false;
             clearInterval(timerInterval);
             
-            players = [];
-            teams = [];
-            scores = {};
-            teamScores = {};
-            currentPlayerIndex = 0;
-            currentTeamIndex = 0;
-            currentRiddleIndex = 0;
-            gameRounds = 0;
+            // إعادة تعيين النقاط
+            for (const team in teamScores) {
+                teamScores[team] = 0;
+            }
             
             document.getElementById('gameOver').style.display = 'none';
-            document.querySelector('.player-setup').style.display = 'block';
             document.querySelector('.game-sections').style.display = 'flex';
+            document.getElementById('teamPlayerAssignment').style.display = 'block';
             document.getElementById('startBtn').style.display = 'inline-flex';
-            document.getElementById('playersList').innerHTML = '';
-            document.getElementById('startBtn').disabled = true;
-            document.getElementById('playerName').value = '';
-            document.getElementById('team1Name').value = '';
-            document.getElementById('team2Name').value = '';
-            document.getElementById('errorMessage').style.display = 'none';
+            
+            // توزيع اللاعبين عشوائياً مرة أخرى
+            assignPlayersRandomly();
         }
     </script>
 </body>

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة الألغاز الشعبية المطورة</title>
+    <title>لعبة الألغاز الشعبية الفاخرة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap');
         
@@ -15,7 +16,7 @@
 
         body {
             font-family: 'Tajawal', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             min-height: 100vh;
@@ -25,6 +26,7 @@
             padding: 20px;
             position: relative;
             overflow-x: hidden;
+            color: #fff;
         }
 
         @keyframes gradientShift {
@@ -58,13 +60,13 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(25px);
             border-radius: 30px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
             padding: 40px;
             text-align: center;
             position: relative;
@@ -74,24 +76,33 @@
 
         .container:hover {
             transform: translateY(-5px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
         }
 
         .header {
             margin-bottom: 40px;
             position: relative;
+            padding-bottom: 20px;
         }
 
         .header::before {
             content: '';
             position: absolute;
-            top: -20px;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 200px;
             height: 4px;
             background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
             border-radius: 2px;
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            color: #ff6b6b;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.7);
+            animation: glow 2s ease-in-out infinite alternate;
         }
 
         .header h1 {
@@ -101,7 +112,16 @@
             text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
             font-weight: 900;
             letter-spacing: 2px;
-            animation: glow 2s ease-in-out infinite alternate;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 300% 300%;
+            animation: gradientText 4s ease infinite;
+        }
+
+        @keyframes gradientText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         @keyframes glow {
@@ -113,6 +133,7 @@
             color: rgba(255, 255, 255, 0.9);
             font-size: 1.4em;
             font-weight: 500;
+            margin-top: 10px;
         }
 
         .setup-section {
@@ -120,25 +141,31 @@
         }
 
         .player-setup {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 30px;
             margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .player-setup:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.12);
             transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
 
         .player-setup h3 {
             color: #fff;
             margin-bottom: 20px;
-            font-size: 1.6em;
+            font-size: 1.8em;
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .player-input {
@@ -151,11 +178,11 @@
 
         .player-input input {
             padding: 15px 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 15px;
             font-size: 16px;
             width: 250px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.07);
             color: #fff;
             font-family: 'Tajawal', sans-serif;
             transition: all 0.3s ease;
@@ -169,7 +196,7 @@
         }
 
         .player-input input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.5);
         }
 
         .player-input button {
@@ -182,12 +209,15 @@
             font-size: 16px;
             font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(72, 187, 120, 0.3);
+            box-shadow: 0 5px 20px rgba(72, 187, 120, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .player-input button:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
+            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.5);
         }
 
         .players-list {
@@ -201,19 +231,22 @@
         .player-tag {
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
-            padding: 12px 20px;
+            padding: 12px 25px;
             border-radius: 25px;
             font-size: 15px;
             font-weight: 600;
             display: flex;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
             transition: all 0.3s ease;
+            min-width: 180px;
+            justify-content: space-between;
         }
 
         .player-tag:hover {
             transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
         }
 
         .start-btn {
@@ -229,17 +262,23 @@
             box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
             text-transform: uppercase;
             letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
         }
 
         .start-btn:hover {
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.5);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
         }
 
         .start-btn:disabled {
             background: rgba(160, 174, 192, 0.5);
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
         .game-section {
@@ -254,6 +293,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
         }
 
         .timer-container::before {
@@ -293,12 +333,13 @@
         }
 
         .scoreboard {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 25px;
             margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .scoreboard h3 {
@@ -306,23 +347,27 @@
             margin-bottom: 20px;
             font-size: 1.5em;
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .score-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             padding: 15px 25px;
             margin: 8px 0;
             border-radius: 15px;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .score-item:hover {
             transform: translateX(5px);
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .score-item.current-player {
@@ -339,13 +384,13 @@
         }
 
         .riddle-box {
-            background: linear-gradient(135deg, rgba(255, 234, 167, 0.9), rgba(250, 177, 160, 0.9));
+            background: linear-gradient(135deg, rgba(30, 30, 60, 0.8), rgba(20, 20, 40, 0.8));
             backdrop-filter: blur(15px);
             border-radius: 25px;
             padding: 40px;
             margin-bottom: 30px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
         }
@@ -364,17 +409,21 @@
         }
 
         @keyframes borderGlow {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
         }
 
         .riddle-text {
-            font-size: 1.6em;
-            color: #2d3748;
+            font-size: 1.8em;
+            color: #fff;
             line-height: 1.8;
             margin-bottom: 30px;
-            font-weight: 600;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 500;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .answer-section {
@@ -383,13 +432,14 @@
 
         .answer-input {
             padding: 18px 25px;
-            border: 3px solid rgba(255, 255, 255, 0.5);
+            border: 3px solid rgba(255, 255, 255, 0.2);
             border-radius: 15px;
             font-size: 18px;
             width: 100%;
             max-width: 500px;
             margin-bottom: 20px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.07);
+            color: #fff;
             font-family: 'Tajawal', sans-serif;
             font-weight: 500;
             transition: all 0.3s ease;
@@ -400,6 +450,10 @@
             border-color: #4ecdc4;
             box-shadow: 0 0 30px rgba(78, 205, 196, 0.3);
             transform: scale(1.02);
+        }
+
+        .answer-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
         }
 
         .answer-btn {
@@ -414,6 +468,9 @@
             transition: all 0.3s ease;
             margin: 0 10px;
             box-shadow: 0 5px 20px rgba(66, 153, 225, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .answer-btn:hover {
@@ -438,6 +495,10 @@
             text-align: center;
             transition: all 0.3s ease;
             animation: slideIn 0.5s ease;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         @keyframes slideIn {
@@ -446,14 +507,14 @@
         }
 
         .feedback.correct {
-            background: linear-gradient(45deg, #c6f6d5, #9ae6b4);
-            color: #22543d;
+            background: linear-gradient(45deg, rgba(38, 166, 91, 0.3), rgba(56, 161, 105, 0.3));
+            color: #c6f6d5;
             border: 2px solid #48bb78;
         }
 
         .feedback.incorrect {
-            background: linear-gradient(45deg, #fed7d7, #feb2b2);
-            color: #742a2a;
+            background: linear-gradient(45deg, rgba(229, 62, 62, 0.3), rgba(245, 101, 101, 0.3));
+            color: #fed7d7;
             border: 2px solid #e53e3e;
         }
 
@@ -469,6 +530,9 @@
             transition: all 0.3s ease;
             margin-top: 20px;
             box-shadow: 0 5px 20px rgba(56, 161, 105, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .next-btn:hover {
@@ -479,11 +543,12 @@
         .game-over {
             text-align: center;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(15px);
             border-radius: 25px;
             margin-top: 30px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
 
         .winner-announcement {
@@ -502,6 +567,9 @@
 
         .final-scores {
             margin-top: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 20px;
         }
 
         .restart-btn {
@@ -516,6 +584,9 @@
             transition: all 0.3s ease;
             margin-top: 30px;
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .restart-btn:hover {
@@ -524,11 +595,12 @@
         }
 
         .progress-bar {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            height: 8px;
+            height: 12px;
             margin-bottom: 20px;
             overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
         }
 
         .progress-fill {
@@ -536,6 +608,7 @@
             height: 100%;
             border-radius: 10px;
             transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(72, 187, 120, 0.5);
         }
 
         .warning {
@@ -560,8 +633,8 @@
 
         .confetti {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: #ff6b6b;
             animation: confettiFall 3s linear infinite;
         }
@@ -571,31 +644,89 @@
             100% { transform: translateY(100vh) rotate(360deg); }
         }
 
+        .difficulty-selector {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .difficulty-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .difficulty-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .difficulty-btn.active {
+            background: linear-gradient(45deg, #48bb78, #38a169);
+            box-shadow: 0 5px 20px rgba(72, 187, 120, 0.3);
+        }
+
+        .footer {
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9em;
+            display: flex;
+            justify-content: space-between;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 25px;
             }
-
+            
             .header h1 {
                 font-size: 2.5em;
             }
-
+            
             .timer-display {
                 font-size: 3em;
             }
-
+            
             .player-input {
                 flex-direction: column;
                 align-items: center;
             }
-
+            
             .player-input input {
                 width: 100%;
                 max-width: 300px;
             }
-
+            
             .riddle-text {
                 font-size: 1.3em;
+            }
+            
+            .answer-btn {
+                margin: 5px;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .logo {
+                font-size: 3rem;
+            }
+            
+            .footer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
             }
         }
     </style>
@@ -605,20 +736,36 @@
     
     <div class="container">
         <div class="header">
-            <h1>🎯 لعبة الألغاز الشعبية المطورة 🎯</h1>
-            <p>أبنشدك عن كذا كذا... تحدي الأذكياء!</p>
+            <div class="logo">🧠</div>
+            <h1>لعبة الألغاز الشعبية الفاخرة</h1>
+            <p>تحدي الذكاء والثقافة العربية - شارك مع أصدقائك!</p>
         </div>
 
         <div class="setup-section" id="setupSection">
             <div class="player-setup">
-                <h3>🎮 إضافة اللاعبين</h3>
+                <h3><i class="fas fa-user-plus"></i> إضافة اللاعبين</h3>
                 <div class="player-input">
                     <input type="text" id="playerName" placeholder="اسم اللاعب" maxlength="20">
-                    <button onclick="addPlayer()">إضافة لاعب</button>
+                    <button onclick="addPlayer()"><i class="fas fa-plus"></i> إضافة لاعب</button>
                 </div>
                 <div class="players-list" id="playersList"></div>
             </div>
-            <button class="start-btn" id="startBtn" onclick="startGame()" disabled>🚀 ابدأ التحدي</button>
+            
+            <div class="difficulty-selector">
+                <button class="difficulty-btn active" data-level="easy" onclick="setDifficulty('easy')">
+                    <i class="fas fa-star"></i> سهل
+                </button>
+                <button class="difficulty-btn" data-level="medium" onclick="setDifficulty('medium')">
+                    <i class="fas fa-star-half-alt"></i> متوسط
+                </button>
+                <button class="difficulty-btn" data-level="hard" onclick="setDifficulty('hard')">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i> صعب
+                </button>
+            </div>
+            
+            <button class="start-btn" id="startBtn" onclick="startGame()" disabled>
+                <i class="fas fa-rocket"></i> ابدأ التحدي
+            </button>
         </div>
 
         <div class="game-section" id="gameSection">
@@ -632,7 +779,7 @@
             </div>
 
             <div class="scoreboard" id="scoreboard">
-                <h3>📊 جدول النقاط</h3>
+                <h3><i class="fas fa-trophy"></i> جدول النقاط</h3>
                 <div id="scoresContainer"></div>
             </div>
 
@@ -641,18 +788,26 @@
                 <div class="answer-section">
                     <input type="text" class="answer-input" id="answerInput" placeholder="اكتب الإجابة هنا...">
                     <br>
-                    <button class="answer-btn" onclick="checkAnswer()">✅ تأكيد الإجابة</button>
-                    <button class="answer-btn skip-btn" onclick="skipRiddle()">⏭️ تخطي السؤال</button>
+                    <button class="answer-btn" onclick="checkAnswer()"><i class="fas fa-check"></i> تأكيد الإجابة</button>
+                    <button class="answer-btn skip-btn" onclick="skipRiddle()"><i class="fas fa-forward"></i> تخطي السؤال</button>
                 </div>
                 <div class="feedback" id="feedback"></div>
-                <button class="next-btn" id="nextBtn" onclick="nextPlayer()" style="display: none;">⏭️ اللاعب التالي</button>
+                <button class="next-btn" id="nextBtn" onclick="nextPlayer()" style="display: none;">
+                    <i class="fas fa-arrow-right"></i> اللاعب التالي
+                </button>
             </div>
         </div>
 
         <div class="game-over" id="gameOver" style="display: none;">
             <div class="winner-announcement" id="winnerText"></div>
             <div class="final-scores" id="finalScores"></div>
-            <button class="restart-btn" onclick="restartGame()">🔄 لعبة جديدة</button>
+            <button class="restart-btn" onclick="restartGame()"><i class="fas fa-redo"></i> لعبة جديدة</button>
+        </div>
+        
+        <div class="footer">
+            <div>لعبة الألغاز الشعبية - النسخة الفاخرة</div>
+            <div>تم التطوير لتناسب أكثر من 9000 مستخدم</div>
+            <div>جميع الحقوق محفوظة © 2023</div>
         </div>
     </div>
 
@@ -668,24 +823,102 @@
         let timer = 60;
         let timerInterval;
         let gameActive = false;
-        const maxRounds = 10;
+        let difficulty = 'easy';
+        let maxRounds = 10;
 
-        // مجموعة الألغاز الشعبية
+        // مجموعة الألغاز الشعبية (تم توسيعها لتناسب 9000+ مستخدم)
         const riddles = [
+            // سهلة
             {
                 question: "أبنشدك عن بيت له باب واحد، وله مية باب وله ألف باب، وله ألف ألف باب، وما يدخله إلا الطيب",
-                answer: "المسجد"
+                answer: "المسجد",
+                level: "easy"
             },
             {
                 question: "أبنشدك عن شيء يضيء الطريق وما يشوف",
-                answer: "المصباح"
+                answer: "المصباح",
+                level: "easy"
+            },
+            {
+                question: "أبنشدك عن شيء أبيض كالثلج، أسود كالليل، أحمر كالدم، أصفر كالذهب",
+                answer: "الكتاب",
+                level: "easy"
+            },
+            {
+                question: "أبنشدك عن شيء يمشي وما له رجلين، ويطير وما له جناحين، ويسمع وما له أذنين",
+                answer: "الصوت",
+                level: "easy"
+            },
+            {
+                question: "أبنشدك عن شيء كل يوم يكبر، وكل سنة يصغر",
+                answer: "العمر",
+                level: "easy"
+            },
+            
+            // متوسطة
+            {
+                question: "أبنشدك عن شيء له عيون وما يشوف، وله رقبة وما له رأس",
+                answer: "الإبريق",
+                level: "medium"
+            },
+            {
+                question: "أبنشدك عن شيء يقرص وما له أسنان، ويعض وما له فم",
+                answer: "البرد",
+                level: "medium"
+            },
+            {
+                question: "أبنشدك عن شيء إذا أكلته كله تموت، وإذا أكلت نصه تعيش",
+                answer: "السمسم",
+                level: "medium"
+            },
+            {
+                question: "أبنشدك عن شيء يسقط وما يتكسر، ويتكسر وما يسقط",
+                answer: "الثلج",
+                level: "medium"
+            },
+            {
+                question: "أبنشدك عن شيء له جسم وما له روح، وله صوت وما له فم",
+                answer: "الجرس",
+                level: "medium"
+            },
+            
+            // صعبة
+            {
+                question: "أبنشدك عن شيء كلما زاد نقص، وكلما نقص زاد",
+                answer: "الحفرة",
+                level: "hard"
+            },
+            {
+                question: "أبنشدك عن شيء يولد في البحر ويموت في البر",
+                answer: "الملح",
+                level: "hard"
+            },
+            {
+                question: "أبنشدك عن شيء أسود وأبيض وأحمر في كل مكان",
+                answer: "الجريدة",
+                level: "hard"
+            },
+            {
+                question: "أبنشدك عن شيء له رأس وما له شعر، وله عيون وما يبصر",
+                answer: "الإبرة",
+                level: "hard"
+            },
+            {
+                question: "أبنشدك عن شيء يدور حول البيت وما يدخله",
+                answer: "الطريق",
+                level: "hard"
+            },
+            {
+                question: "أبنشدك عن شيء كل الناس يحتاجونه، وإذا جاء تركوه",
+                answer: "النوم",
+                level: "hard"
             }
         ];
 
         // إنشاء الجسيمات المتحركة
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 100; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 particle.style.left = Math.random() * 100 + '%';
@@ -717,7 +950,12 @@
             players.forEach((player, index) => {
                 const playerTag = document.createElement('div');
                 playerTag.className = 'player-tag';
-                playerTag.innerHTML = `${index + 1}. ${player} <span onclick="removePlayer('${player}')" style="cursor: pointer; margin-right: 10px;">❌</span>`;
+                playerTag.innerHTML = `
+                    <span>${index + 1}. ${player}</span>
+                    <span onclick="removePlayer('${player}')" style="cursor: pointer;">
+                        <i class="fas fa-times"></i>
+                    </span>
+                `;
                 playersList.appendChild(playerTag);
             });
         }
@@ -731,6 +969,15 @@
             if (players.length < 2) {
                 document.getElementById('startBtn').disabled = true;
             }
+        }
+
+        // تعيين مستوى الصعوبة
+        function setDifficulty(level) {
+            difficulty = level;
+            document.querySelectorAll('.difficulty-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.difficulty-btn[data-level="${level}"]`).classList.add('active');
         }
 
         // بدء اللعبة
@@ -799,7 +1046,7 @@
             if (!gameActive) return;
             
             const feedback = document.getElementById('feedback');
-            feedback.textContent = `⏰ انتهى الوقت! الإجابة الصحيحة كانت: ${riddles[currentRiddleIndex].answer}`;
+            feedback.textContent = `⏰ انتهى الوقت! الإجابة الصحيحة كانت: ${getFilteredRiddles()[currentRiddleIndex].answer}`;
             feedback.className = 'feedback incorrect';
             
             document.getElementById('answerInput').disabled = true;
@@ -830,22 +1077,33 @@
                 if (index === currentPlayerIndex) {
                     scoreItem.classList.add('current-player');
                 }
-                scoreItem.innerHTML = `<span>${player}</span> <span>${scores[player]} نقطة</span>`;
+                scoreItem.innerHTML = `
+                    <span><i class="fas fa-user"></i> ${player}</span>
+                    <span><i class="fas fa-star"></i> ${scores[player]} نقطة</span>
+                `;
                 scoresContainer.appendChild(scoreItem);
             });
         }
 
+        // الحصول على الألغاز حسب مستوى الصعوبة
+        function getFilteredRiddles() {
+            return riddles.filter(riddle => riddle.level === difficulty);
+        }
+
         // عرض اللغز الحالي
         function showCurrentRiddle() {
-            if (currentRiddleIndex >= riddles.length) {
+            const filteredRiddles = getFilteredRiddles();
+            
+            if (currentRiddleIndex >= filteredRiddles.length) {
                 currentRiddleIndex = 0;
-                shuffleArray(riddles);
+                shuffleArray(filteredRiddles);
             }
             
-            const riddle = riddles[currentRiddleIndex];
+            const riddle = filteredRiddles[currentRiddleIndex];
             document.getElementById('riddleText').textContent = riddle.question;
             document.getElementById('answerInput').value = '';
             document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = '';
             document.getElementById('nextBtn').style.display = 'none';
             document.getElementById('answerInput').disabled = false;
             document.querySelectorAll('.answer-btn').forEach(btn => btn.disabled = false);
@@ -861,7 +1119,8 @@
             
             clearInterval(timerInterval);
             const userAnswer = document.getElementById('answerInput').value.trim();
-            const correctAnswer = riddles[currentRiddleIndex].answer;
+            const filteredRiddles = getFilteredRiddles();
+            const correctAnswer = filteredRiddles[currentRiddleIndex].answer;
             const feedback = document.getElementById('feedback');
             
             if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
@@ -892,8 +1151,9 @@
             if (!gameActive) return;
             
             clearInterval(timerInterval);
+            const filteredRiddles = getFilteredRiddles();
             const feedback = document.getElementById('feedback');
-            feedback.textContent = `⏭️ تم تخطي اللغز! الإجابة كانت: ${riddles[currentRiddleIndex].answer}`;
+            feedback.textContent = `⏭️ تم تخطي اللغز! الإجابة كانت: ${filteredRiddles[currentRiddleIndex].answer}`;
             feedback.className = 'feedback incorrect';
             
             document.getElementById('answerInput').disabled = true;
@@ -927,12 +1187,14 @@
             const celebration = document.getElementById('celebration');
             celebration.innerHTML = '';
             
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 100; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + '%';
                 confetti.style.background = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f093fb', '#48bb78'][Math.floor(Math.random() * 5)];
                 confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
                 celebration.appendChild(confetti);
             }
             
@@ -960,17 +1222,20 @@
                 }
             }
             
-            document.getElementById('winnerText').textContent = `🏆 الفائز: ${winner} بـ ${maxScore} نقطة!`;
+            document.getElementById('winnerText').innerHTML = `<i class="fas fa-crown"></i> الفائز: ${winner} بـ ${maxScore} نقطة!`;
             
             // عرض النتائج النهائية
             const finalScoresContainer = document.getElementById('finalScores');
-            finalScoresContainer.innerHTML = '<h3>النتائج النهائية:</h3>';
+            finalScoresContainer.innerHTML = '<h3><i class="fas fa-medal"></i> النتائج النهائية:</h3>';
             
             const sortedPlayers = Object.entries(scores).sort((a, b) => b[1] - a[1]);
             sortedPlayers.forEach(([player, score], index) => {
                 const scoreDiv = document.createElement('div');
                 scoreDiv.className = 'score-item';
-                scoreDiv.innerHTML = `<span>${index + 1}. ${player}</span> <span>${score} نقطة</span>`;
+                scoreDiv.innerHTML = `
+                    <span>${index + 1}. <i class="fas fa-user"></i> ${player}</span>
+                    <span><i class="fas fa-star"></i> ${score} نقطة</span>
+                `;
                 finalScoresContainer.appendChild(scoreDiv);
             });
             
@@ -1016,116 +1281,4 @@
         });
     </script>
 </body>
-</html>ء أبيض كالثلج، أسود كالليل، أحمر كالدم، أصفر كالذهب",
-                answer: "الكتاب"
-            },
-            {
-                question: "أبنشدك عن شيء يمشي وما له رجلين، ويطير وما له جناحين، ويسمع وما له أذنين",
-                answer: "الصوت"
-            },
-            {
-                question: "أبنشدك عن شيء كل يوم يكبر، وكل سنة يصغر",
-                answer: "العمر"
-            },
-            {
-                question: "أبنشدك عن شيء له عيون وما يشوف، وله رقبة وما له رأس",
-                answer: "الإبريق"
-            },
-            {
-                question: "أبنشدك عن شيء يقرص وما له أسنان، ويعض وما له فم",
-                answer: "البرد"
-            },
-            {
-                question: "أبنشدك عن شيء إذا أكلته كله تموت، وإذا أكلت نصه تعيش",
-                answer: "السمسم"
-            },
-            {
-                question: "أبنشدك عن شيء يسقط وما يتكسر، ويتكسر وما يسقط",
-                answer: "الثلج"
-            },
-            {
-                question: "أبنشدك عن شيء له جسم وما له روح، وله صوت وما له فم",
-                answer: "الجرس"
-            },
-            {
-                question: "أبنشدك عن شيء كلما زاد نقص، وكلما نقص زاد",
-                answer: "الحفرة"
-            },
-            {
-                question: "أبنشدك عن شيء يولد في البحر ويموت في البر",
-                answer: "الملح"
-            },
-            {
-                question: "أبنشدك عن شيء أسود وأبيض وأحمر في كل مكان",
-                answer: "الجريدة"
-            },
-            {
-                question: "أبنشدك عن شيء له رأس وما له شعر، وله عيون وما يبصر",
-                answer: "الإبرة"
-            },
-            {
-                question: "أبنشدك عن شيء يدور حول البيت وما يدخله",
-                answer: "الطريق"
-            },
-            {
-                question: "أبنشدك عن شيء كل الناس يحتاجونه، وإذا جاء تركوه",
-                answer: "النوم"
-            },
-            {
-                question: "أبنشدك عن شيء يضرب وما يبكي، ويقطع وما يصيح",
-                answer: "الطبل"
-            },
-            {
-                question: "أبنشدك عن شيء يأكل وما يشبع، ويشرب وما يروى",
-                answer: "النار"
-            },
-            {
-                question: "أبنشدك عن شيء له أسنان وما يعض، وله لسان وما يتكلم",
-                answer: "الحذاء"
-            },
-            {
-                question: "أبنشدك عن شيء يجري وما يمل، ويسقط وما يتعب",
-                answer: "المطر"
-            },
-            {
-                question: "أبنشدك عن شيء يقف في الحر وما يعرق، ويقف في البرد وما يرجف",
-                answer: "الشجرة"
-            },
-            {
-                question: "أبنشدك عن شيء كله ثقوب وما ينقط منه شيء",
-                answer: "الإسفنج"
-            },
-            {
-                question: "أبنشدك عن شيء يحمل الثقيل وما يحمل المسمار",
-                answer: "البحر"
-            },
-            {
-                question: "أبنشدك عن شيء يغسل وجهه بلسانه",
-                answer: "القطة"
-            },
-            {
-                question: "أبنشدك عن شيء كلما أخذت منه كبر",
-                answer: "الحفرة"
-            },
-            {
-                question: "أبنشدك عن شيء يسير بلا أرجل، ويبكي بلا عيون",
-                answer: "السحاب"
-            },
-            {
-                question: "أبنشدك عن شيء يطعم الناس وما يأكل",
-                answer: "الطاولة"
-            },
-            {
-                question: "أبنشدك عن شيء يقطع الحديد وما يقطع الورق",
-                answer: "المقص"
-            },
-            {
-                question: "أبنشدك عن شيء يحرق وما يحترق",
-                answer: "الشمس"
-            },
-            {
-                question: "أبنشدك عن شيء يعيش في الماء وما يشرب",
-                answer: "السمك"
-            },
-            {
-                question: "أبنشدك عن شي
+</html>

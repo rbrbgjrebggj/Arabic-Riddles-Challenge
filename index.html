@@ -607,6 +607,10 @@
             font-weight: bold;
             margin-top: 10px;
             display: none;
+            padding: 10px;
+            background: #ffe0e0;
+            border-radius: 8px;
+            border: 1px solid #ff6b6b;
         }
     </style>
 </head>
@@ -641,10 +645,10 @@
                     
                     <div class="team-names" id="teamNames">
                         <div class="team-input">
-                            <input type="text" id="team1Name" placeholder="اسم الفريق الأول (مثال: الزعيم)" maxlength="20">
+                            <input type="text" id="team1Name" placeholder="اسم الفريق الأول (مثال: الزعيم)" maxlength="20" oninput="updateStartButtonState()">
                         </div>
                         <div class="team-input">
-                            <input type="text" id="team2Name" placeholder="اسم الفريق الثاني (مثال: الكبير)" maxlength="20">
+                            <input type="text" id="team2Name" placeholder="اسم الفريق الثاني (مثال: الكبير)" maxlength="20" oninput="updateStartButtonState()">
                         </div>
                     </div>
                 </div>
@@ -655,7 +659,7 @@
         <div class="section player-setup">
             <h3><i class="fas fa-user-plus"></i> إضافة اللاعبين</h3>
             <div class="player-input">
-                <input type="text" id="playerName" placeholder="اسم اللاعب" maxlength="20">
+                <input type="text" id="playerName" placeholder="اسم اللاعب" maxlength="20" onkeypress="if(event.key === 'Enter') addPlayer()">
                 <button onclick="addPlayer()"><i class="fas fa-plus"></i> إضافة</button>
             </div>
             <div class="players-list" id="playersList"></div>
@@ -694,7 +698,7 @@
                 <div class="difficulty-tag hard">صعب جداً</div>
                 <div class="riddle-text" id="riddleText"></div>
                 <div class="answer-section">
-                    <input type="text" class="answer-input" id="answerInput" placeholder="اكتب الإجابة هنا...">
+                    <input type="text" class="answer-input" id="answerInput" placeholder="اكتب الإجابة هنا..." onkeypress="if(event.key === 'Enter') checkAnswer()">
                     <div class="answer-buttons">
                         <button class="answer-btn submit-btn" onclick="checkAnswer()">
                             <i class="fas fa-check"></i> تأكيد الإجابة
@@ -790,20 +794,6 @@
                     updateStartButtonState();
                 });
             });
-            
-            // إضافة لاعب عند الضغط على Enter
-            document.getElementById('playerName').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    addPlayer();
-                }
-            });
-            
-            // إرسال الإجابة عند الضغط على Enter
-            document.getElementById('answerInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' && gameActive) {
-                    checkAnswer();
-                }
-            });
         });
 
         // إضافة لاعب جديد
@@ -833,7 +823,7 @@
                     errorMessage.style.display = 'none';
                 } else {
                     startBtn.disabled = true;
-                    errorMessage.textContent = 'الرجاء إدخال أسماء الفريقين وإضافة لاعبين';
+                    errorMessage.textContent = 'الرجاء إدخال أسماء الفريقين وإضافة لاعبين على الأقل';
                     errorMessage.style.display = 'block';
                 }
             } else {

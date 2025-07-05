@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة الألغاز الشعبية - تحدي الأذكياء</title>
+    <title>موقع الألغاز الشعبية - عبد العزيز</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
@@ -18,334 +17,322 @@
         body {
             background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
             position: relative;
             overflow-x: hidden;
         }
 
-        .container {
-            width: 100%;
-            max-width: 1000px;
-            background: #fff9e6;
-            border-radius: 25px;
+        /* أنماط رأس الموقع */
+        .site-header {
+            background: linear-gradient(to right, #8b4513, #a52a2a);
+            border-radius: 0 0 20px 20px;
             padding: 25px;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            border-bottom: 5px solid #ffd700;
             position: relative;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            border: 8px solid #d4a017;
-            z-index: 10;
             overflow: hidden;
         }
 
-        .container::before {
+        .site-header::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,20 Q40,5 60,20 T100,20 Q85,40 100,60 T100,100 Q60,85 60,100 T20,100 Q5,85 20,60 T20,20 Z" fill="none" stroke="%23d4a017" stroke-width="0.5" opacity="0.3"/></svg>');
-            opacity: 0.15;
-            z-index: -1;
-        }
-
-        .header {
-            margin-bottom: 25px;
-            position: relative;
-            padding-bottom: 20px;
-            border-bottom: 4px solid #d4a017;
+            height: 8px;
             background: linear-gradient(to right, #ffd700, #ffb700);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border: 3px solid #8b4513;
         }
 
-        .header h1 {
-            color: #8b4513;
+        .site-header h1 {
+            color: #ffd700;
             font-size: 2.8em;
             margin-bottom: 15px;
             font-weight: 900;
-            text-shadow: 3px 3px 0 #ffd700;
+            text-shadow: 3px 3px 0 #8b0000;
             letter-spacing: 1px;
-            position: relative;
+            animation: textGlow 2s infinite alternate;
         }
 
-        .header h1::after {
-            content: "🧩";
-            position: absolute;
-            right: -40px;
-            top: -10px;
-            font-size: 1.5em;
-            transform: rotate(20deg);
+        @keyframes textGlow {
+            from { text-shadow: 3px 3px 0 #8b0000; }
+            to { text-shadow: 3px 3px 15px #ffd700, 3px 3px 0 #8b0000; }
         }
 
-        .header h1::before {
-            content: "🧩";
-            position: absolute;
-            left: -40px;
-            top: -10px;
-            font-size: 1.5em;
-            transform: rotate(-20deg);
-        }
-
-        .header p {
-            color: #a52a2a;
-            font-size: 1.3em;
+        .site-header p {
+            color: #fff;
+            font-size: 1.4em;
             font-weight: 700;
-            margin-top: 10px;
-            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.7);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
-        .setup-section {
-            margin-bottom: 30px;
-            animation: fadeIn 1s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .player-setup {
+        /* أنماط القائمة */
+        .site-nav {
             background: #fff3cc;
-            border-radius: 18px;
-            padding: 25px;
-            margin-bottom: 25px;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 30px auto;
+            max-width: 1000px;
             border: 3px solid #d4a017;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .player-setup::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: #ffd700;
-            border-radius: 50%;
-            opacity: 0.2;
-        }
-
-        .player-setup::after {
-            content: "";
-            position: absolute;
-            bottom: -15px;
-            left: 30px;
-            width: 70px;
-            height: 70px;
-            background: #ff6b6b;
-            border-radius: 50%;
-            opacity: 0.2;
-        }
-
-        .player-setup h3 {
-            color: #8b4513;
-            margin-bottom: 20px;
-            font-size: 1.7em;
-            font-weight: 700;
-            background: linear-gradient(to right, #ffd700, #ffb700);
-            padding: 12px 25px;
-            border-radius: 50px;
-            display: inline-block;
-            border: 2px solid #8b4513;
-            box-shadow: 0 4px 0 #b8860b;
-            position: relative;
-        }
-
-        .player-setup h3 i {
-            margin-left: 10px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .player-input {
+        .site-nav ul {
             display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
             justify-content: center;
+            list-style: none;
             flex-wrap: wrap;
         }
 
-        .player-input input {
-            padding: 14px 20px;
-            border: 3px solid #d4a017;
-            border-radius: 12px;
-            font-size: 18px;
-            width: 280px;
-            background: #fff;
+        .site-nav li {
+            margin: 0 15px;
+        }
+
+        .site-nav a {
+            text-decoration: none;
             color: #8b4513;
-            font-weight: 700;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .player-input input:focus {
-            outline: none;
-            border-color: #ff6b6b;
-            box-shadow: 0 0 15px rgba(255, 107, 107, 0.6), inset 0 2px 5px rgba(0, 0, 0, 0.1);
-            transform: scale(1.02);
-        }
-
-        .player-input input::placeholder {
-            color: #d4a017;
-            opacity: 0.7;
-        }
-
-        .player-input button {
-            padding: 14px 25px;
-            background: linear-gradient(to bottom, #ff6b6b, #d9534f);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: 700;
-            transition: all 0.2s ease;
-            box-shadow: 0 5px 0 #8b0000;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .player-input button:hover {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 #8b0000;
-            background: linear-gradient(to bottom, #ff7b7b, #e9534f);
-        }
-
-        .player-input button:active {
-            transform: translateY(5px);
-            box-shadow: none;
-        }
-
-        .players-list {
-            margin-top: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .player-tag {
-            background: linear-gradient(to bottom, #ffd700, #d4a017);
-            color: #8b4513;
+            font-weight: 900;
+            font-size: 1.2em;
             padding: 10px 20px;
             border-radius: 30px;
-            font-size: 16px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 4px 0 #b8860b;
-            border: 2px solid #8b4513;
             transition: all 0.3s ease;
-            animation: popIn 0.3s ease;
-        }
-
-        @keyframes popIn {
-            0% { transform: scale(0); opacity: 0; }
-            70% { transform: scale(1.1); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .player-tag:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 0 #b8860b;
-        }
-
-        .player-tag .remove-btn {
-            background: #ff6b6b;
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 14px;
-            box-shadow: 0 2px 0 #8b0000;
-        }
-
-        .player-tag .remove-btn:hover {
-            transform: scale(1.1);
-            background: #ff4e4e;
-        }
-
-        .start-btn {
-            background: linear-gradient(to bottom, #32CD32, #228B22);
-            color: white;
-            padding: 16px 35px;
-            border: none;
-            border-radius: 18px;
-            font-size: 20px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 0 #006400;
-            margin-top: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin: 20px auto;
+            display: block;
             position: relative;
             overflow: hidden;
             z-index: 1;
         }
 
-        .start-btn::before {
+        .site-nav a::before {
             content: "";
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
             transition: 0.5s;
             z-index: -1;
         }
 
-        .start-btn:hover::before {
+        .site-nav a:hover::before {
             left: 100%;
         }
 
-        .start-btn:hover {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #006400;
+        .site-nav a:hover {
+            background: #ffd700;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .start-btn:disabled {
-            background: #a9a9a9;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: 0 5px 0 #696969;
+        .site-nav a.active {
+            background: linear-gradient(to right, #ffd700, #ffb700);
+            box-shadow: 0 5px 0 #b8860b;
+            transform: translateY(-3px);
         }
 
+        /* أنماط المحتوى الرئيسي */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-section {
+            background: #fff9e6;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 4px solid #d4a017;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .about-section::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #ffd700;
+            border-radius: 15px;
+            border: 3px solid #8b4513;
+        }
+
+        .section-title {
+            color: #8b4513;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            padding-bottom: 15px;
+            border-bottom: 3px dashed #d4a017;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "★";
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #d4a017;
+            font-size: 1.5em;
+            background: #fff9e6;
+            padding: 0 10px;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            color: #8b4513;
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            border: 5px solid #d4a017;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .games-section {
+            margin-top: 50px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .game-card {
+            background: #fff3cc;
+            border-radius: 20px;
+            padding: 25px;
+            border: 3px solid #d4a017;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(to right, #ffd700, #ffb700);
+        }
+
+        .game-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .game-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(to bottom, #ffd700, #d4a017);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 5px solid #8b4513;
+            box-shadow: 0 5px 0 #b8860b;
+            font-size: 2.5em;
+            color: #8b4513;
+        }
+
+        .game-card h3 {
+            color: #8b4513;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .game-card p {
+            color: #8b4513;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .play-btn {
+            background: linear-gradient(to bottom, #ff6b6b, #d9534f);
+            color: white;
+            padding: 12px 35px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 0 #8b0000;
+            border: 2px solid #8b0000;
+            display: inline-block;
+        }
+
+        .play-btn:hover {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #8b0000;
+        }
+
+        /* أنماط لعبة الألغاز */
         .game-section {
+            background: #fff9e6;
+            border-radius: 25px;
+            padding: 30px;
+            margin: 50px auto;
+            border: 5px solid #d4a017;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            max-width: 1000px;
             display: none;
-            animation: slideIn 0.8s ease;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
+        .game-header {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
+        .game-header h2 {
+            color: #8b4513;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 900;
+            text-shadow: 2px 2px 0 #ffd700;
+        }
+
+        .game-header p {
+            color: #a52a2a;
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        /* أنماط المؤقت */
         .timer-container {
             background: linear-gradient(to bottom, #4a86e8, #1c4587);
             border-radius: 18px;
@@ -374,6 +361,7 @@
             text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
         }
 
+        /* أنماط لوحة اللعبة */
         .game-board {
             display: flex;
             gap: 25px;
@@ -449,6 +437,7 @@
             border-color: #8b4513;
         }
 
+        /* أنماط صندوق اللغز */
         .riddle-box {
             background: #fff3cc;
             border-radius: 18px;
@@ -500,6 +489,7 @@
             transform: rotate(180deg);
         }
 
+        /* أنماط قسم الإجابة */
         .answer-section {
             margin-bottom: 25px;
             position: relative;
@@ -512,13 +502,14 @@
             font-size: 20px;
             width: 100%;
             max-width: 550px;
-            margin-bottom: 20px;
+            margin: 0 auto 20px;
             background: #fff;
             color: #8b4513;
             font-weight: 700;
             text-align: center;
             transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: block;
         }
 
         .answer-input:focus {
@@ -531,14 +522,15 @@
         .btn-group {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             flex-wrap: wrap;
+            margin-top: 20px;
         }
 
         .answer-btn {
             background: linear-gradient(to bottom, #4da6ff, #0066cc);
             color: white;
-            padding: 16px 30px;
+            padding: 16px 40px;
             border: none;
             border-radius: 15px;
             font-size: 18px;
@@ -550,7 +542,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            min-width: 220px;
+            min-width: 250px;
         }
 
         .answer-btn:hover {
@@ -575,6 +567,8 @@
             animation: slideIn 0.5s ease;
             border: 3px solid;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 20px auto;
         }
 
         @keyframes slideIn {
@@ -597,7 +591,7 @@
         .next-btn {
             background: linear-gradient(to bottom, #38a169, #2f855a);
             color: white;
-            padding: 16px 35px;
+            padding: 16px 45px;
             border: none;
             border-radius: 18px;
             font-size: 18px;
@@ -619,6 +613,7 @@
             box-shadow: 0 2px 0 #1a3c29;
         }
 
+        /* أنماط نهاية اللعبة */
         .game-over {
             text-align: center;
             padding: 40px;
@@ -630,6 +625,7 @@
             animation: zoomIn 0.8s ease;
             position: relative;
             overflow: hidden;
+            display: none;
         }
 
         @keyframes zoomIn {
@@ -681,18 +677,10 @@
             margin: 30px auto;
         }
 
-        .final-scores h3 {
-            color: #8b4513;
-            margin-bottom: 20px;
-            font-size: 1.8em;
-            padding-bottom: 10px;
-            border-bottom: 3px dashed #d4a017;
-        }
-
         .restart-btn {
             background: linear-gradient(to bottom, #ff6b6b, #d9534f);
             color: white;
-            padding: 18px 40px;
+            padding: 18px 50px;
             border: none;
             border-radius: 20px;
             font-size: 20px;
@@ -731,35 +719,73 @@
             box-shadow: 0 2px 0 #8b0000;
         }
 
-        .medal {
+        /* أنماط تذييل الموقع */
+        .site-footer {
+            background: linear-gradient(to right, #8b4513, #a52a2a);
+            color: #ffd700;
+            text-align: center;
+            padding: 30px;
+            margin-top: 70px;
+            border-radius: 20px 20px 0 0;
+            border-top: 5px solid #ffd700;
+            position: relative;
+        }
+
+        .site-footer::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(to right, #ffd700, #ffb700);
+            border-radius: 5px;
+        }
+
+        .site-footer p {
+            font-size: 1.2em;
+            margin: 10px 0;
+            font-weight: 700;
+        }
+
+        .copyright {
+            font-size: 1.4em;
+            margin-top: 20px;
+            color: #ffd700;
+            font-weight: 900;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
             display: inline-block;
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 60px;
             background: #ffd700;
+            color: #8b4513;
             border-radius: 50%;
-            border: 3px solid #8b4513;
-            margin-left: 15px;
-            line-height: 40px;
-            font-weight: bold;
-            font-size: 20px;
-            box-shadow: 0 3px 0 #b8860b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            transition: all 0.3s ease;
+            border: 2px solid #8b4513;
+            box-shadow: 0 4px 0 #b8860b;
         }
 
-        .rank-number {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            background: #ff6b6b;
-            color: white;
-            border-radius: 50%;
-            margin-left: 15px;
-            line-height: 30px;
-            font-weight: bold;
-            font-size: 16px;
-            box-shadow: 0 2px 0 #8b0000;
+        .social-links a:hover {
+            transform: translateY(-8px);
+            background: #ffb700;
+            box-shadow: 0 8px 0 #b8860b;
         }
 
-        /* الزخارف الشعبية */
+        /* أنماط للزخارف */
         .folk-pattern {
             position: absolute;
             width: 150px;
@@ -784,20 +810,6 @@
             animation: rotateReverse 40s infinite linear;
         }
 
-        .pattern-3 {
-            top: 20%;
-            right: 10%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M5,50 Q25,25 50,25 Q75,25 95,50 Q75,75 50,75 Q25,75 5,50 Z" fill="none" stroke="%23ff6b6b" stroke-width="2"/></svg>');
-            animation: pulseScale 10s infinite ease-in-out;
-        }
-
-        .pattern-4 {
-            bottom: 15%;
-            left: 10%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="15" y="15" width="70" height="70" rx="15" fill="none" stroke="%2338a169" stroke-width="2"/></svg>');
-            animation: pulse 8s infinite ease-in-out;
-        }
-
         @keyframes rotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -808,219 +820,212 @@
             to { transform: rotate(0deg); }
         }
 
-        @keyframes pulseScale {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        /* تأثيرات النص */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        /* الشريط العلوي */
-        .ribbon {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: #ff6b6b;
-            color: white;
-            padding: 8px 30px;
-            font-weight: bold;
-            font-size: 18px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-            transform: rotate(15deg);
-        }
-
-        .ribbon::before, .ribbon::after {
-            content: "";
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-style: solid;
-        }
-
-        .ribbon::before {
-            top: 0;
-            left: -15px;
-            border-width: 0 15px 15px 0;
-            border-color: transparent #8b0000 transparent transparent;
-        }
-
-        .ribbon::after {
-            bottom: 0;
-            right: -15px;
-            border-width: 15px 15px 0 0;
-            border-color: #8b0000 transparent transparent transparent;
-        }
-
+        /* أنماط متجاوبة */
         @media (max-width: 768px) {
-            .container {
-                padding: 15px;
+            .site-header h1 {
+                font-size: 2em;
             }
             
-            .header h1 {
-                font-size: 2em;
+            .site-nav a {
+                padding: 8px 15px;
+                font-size: 1em;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .game-card {
+                padding: 20px;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .answer-btn {
+                min-width: 100%;
+                max-width: 300px;
             }
             
             .timer-display {
                 font-size: 2.5em;
             }
-            
-            .player-input {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .player-input input {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .riddle-text {
-                font-size: 1.3em;
-                padding: 15px;
-            }
-            
-            .game-board {
-                flex-direction: column;
-            }
-            
-            .answer-btn {
-                margin: 5px;
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .winner-announcement {
-                font-size: 1.8em;
-                padding: 10px 20px;
-            }
-            
-            .winner-announcement::before, 
-            .winner-announcement::after {
-                display: none;
-            }
-        }
-
-        /* شريط التقدم الزمني */
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 10px;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(to right, #4CAF50, #8BC34A);
-            border-radius: 10px;
-            transition: width 1s linear;
-        }
-
-        .time-labels {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 5px;
-            font-size: 14px;
-            color: #555;
-            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="folk-pattern pattern-1"></div>
     <div class="folk-pattern pattern-2"></div>
-    <div class="folk-pattern pattern-3"></div>
-    <div class="folk-pattern pattern-4"></div>
     
-    <div class="container">
-        <div class="ribbon">100K+ مشاهدات!</div>
-        
-        <div class="header">
-            <h1 class="floating">لعبة الألغاز الشعبية</h1>
-            <p>أبنشدك عن كذا كذا... تحدي الأذكياء!</p>
-        </div>
+    <!-- رأس الموقع -->
+    <header class="site-header">
+        <h1>موقع الألغاز الشعبية</h1>
+        <p>استمتع بأفضل الألعاب الشعبية والتحديات الذهنية الممتعة، اختبر ذكاءك وتحدى أصدقاءك!</p>
+    </header>
 
-        <div class="setup-section" id="setupSection">
-            <div class="player-setup">
-                <h3><i class="fas fa-users"></i> إضافة اللاعبين</h3>
-                <div class="player-input">
-                    <input type="text" id="playerName" placeholder="اسم اللاعب" maxlength="20">
-                    <button onclick="addPlayer()"><i class="fas fa-user-plus"></i> إضافة لاعب</button>
-                </div>
-                <div class="players-list" id="playersList"></div>
-            </div>
-            <button class="start-btn" id="startBtn" onclick="startGame()" disabled>
-                <i class="fas fa-rocket"></i> ابدأ التحدي
-            </button>
-        </div>
+    <!-- قائمة التنقل -->
+    <nav class="site-nav">
+        <ul>
+            <li><a href="#" class="active">الرئيسية</a></li>
+            <li><a href="#" onclick="showGame()">لعبة الألغاز</a></li>
+            <li><a href="#">الألعاب</a></li>
+            <li><a href="#">من نحن</a></li>
+            <li><a href="#">اتصل بنا</a></li>
+        </ul>
+    </nav>
 
-        <div class="game-section" id="gameSection">
-            <div class="timer-container">
-                <div class="timer-display" id="timerDisplay">02:00</div>
-                <div class="timer-label">دقيقتين متبقيتين</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-                <div class="time-labels">
-                    <span>02:00</span>
-                    <span>01:00</span>
-                    <span>00:00</span>
-                </div>
-            </div>
-
-            <div class="game-board">
-                <div class="scoreboard" id="scoreboard">
-                    <h3><i class="fas fa-clipboard-list"></i> اللاعبون</h3>
-                    <div id="scoresContainer"></div>
+    <!-- المحتوى الرئيسي -->
+    <div class="main-content">
+        <!-- قسم عن الموقع -->
+        <section class="about-section">
+            <h2 class="section-title">مرحباً بكم في موقع الألغاز الشعبية</h2>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>موقعنا هو وجهتك المثالية لمحبي الألغاز والألعاب الشعبية التقليدية. نقدم لكم تجربة فريدة وممتعة تجمع بين التحدي الذهني والمتعة.</p>
+                    <p>تم تطوير هذا الموقع بعناية ليوفر لكم أفضل الألعاب الشعبية التي تناسب جميع الأعمار، مع الحفاظ على الأصالة والتراث العربي الأصيل.</p>
+                    <p>استمتع بتحدي أصدقائك واختبر مهاراتك الذهنية مع ألعابنا المبتكرة والممتعة. يمكنك اللعب بمفردك أو مع الأصدقاء لخلق جو من المنافسة الشريفة والمتعة.</p>
                 </div>
                 
-                <div class="leaderboard" id="leaderboard">
-                    <h3><i class="fas fa-trophy"></i> الترتيب</h3>
-                    <div id="leaderboardList"></div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&h=400&q=80" alt="صورة عن الألغاز الشعبية">
                 </div>
             </div>
-
-            <div class="riddle-box">
-                <div class="riddle-text" id="riddleText"></div>
-                <div class="answer-section">
-                    <input type="text" class="answer-input" id="answerInput" placeholder="اكتب الإجابة هنا...">
-                    <div class="btn-group">
-                        <button class="answer-btn" onclick="checkAnswer()">
-                            <i class="fas fa-check-circle"></i> تأكيد الإجابة
-                        </button>
-                        <button class="answer-btn skip-btn" onclick="skipRiddle()">
-                            <i class="fas fa-forward"></i> تخطي السؤال
-                        </button>
+        </section>
+        
+        <!-- قسم الألعاب -->
+        <section class="about-section games-section">
+            <h2 class="section-title">ألعابنا الشعبية</h2>
+            
+            <div class="games-grid">
+                <!-- لعبة الألغاز -->
+                <div class="game-card">
+                    <div class="game-icon">
+                        <i class="fas fa-puzzle-piece"></i>
                     </div>
-                    <div class="feedback" id="feedback"></div>
-                    <button class="next-btn" id="nextBtn" onclick="nextPlayer()" style="display: none;">
-                        <i class="fas fa-arrow-right"></i> اللاعب التالي
+                    <h3>الألغاز الشعبية</h3>
+                    <p>اختبر ذكاءك مع مجموعة رائعة من الألغاز الشعبية الممتعة. كل لغز هو تحدي جديد يتطلب التفكير الإبداعي والذكاء.</p>
+                    <button class="play-btn" onclick="showGame()">
+                        <i class="fas fa-play"></i> العب الآن
+                    </button>
+                </div>
+                
+                <!-- لعبة الذكاء -->
+                <div class="game-card">
+                    <div class="game-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>تحدي الذكاء</h3>
+                    <p>اختبر قدراتك الذهنية مع أسئلة متنوعة في الرياضيات والمنطق والتفكير الإبداعي. كل سؤال هو فرصة لتحسين مهاراتك.</p>
+                    <button class="play-btn">
+                        <i class="fas fa-play"></i> العب الآن
+                    </button>
+                </div>
+                
+                <!-- لعبة الكلمات -->
+                <div class="game-card">
+                    <div class="game-icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <h3>تحدي الكلمات</h3>
+                    <p>اكتشف الكلمات المخفية في الشبكة. كلما وجدت كلمات أكثر، كلما زادت نقاطك. تحدى نفسك ووسع مفرداتك اللغوية.</p>
+                    <button class="play-btn">
+                        <i class="fas fa-play"></i> العب الآن
                     </button>
                 </div>
             </div>
-        </div>
+        </section>
+        
+        <!-- لعبة الألغاز الشعبية -->
+        <section id="gameContainer" class="game-section">
+            <div class="game-header">
+                <h2>لعبة الألغاز الشعبية</h2>
+                <p>أبنشدك عن كذا كذا... تحدي الأذكياء!</p>
+            </div>
 
-        <div class="game-over" id="gameOver" style="display: none;">
-            <div class="winner-announcement" id="winnerText"></div>
-            <div class="final-scores" id="finalScores"></div>
-            <button class="restart-btn" onclick="restartGame()">
-                <i class="fas fa-redo-alt"></i> لعبة جديدة
-            </button>
-        </div>
+            <!-- قسم إعداد اللاعبين -->
+            <div id="setupSection">
+                <div class="player-setup">
+                    <h3><i class="fas fa-users"></i> إضافة اللاعبين</h3>
+                    <div class="player-input">
+                        <input type="text" id="playerName" placeholder="اسم اللاعب" maxlength="20">
+                        <button onclick="addPlayer()"><i class="fas fa-user-plus"></i> إضافة لاعب</button>
+                    </div>
+                    <div class="players-list" id="playersList"></div>
+                </div>
+                <button class="start-btn" id="startBtn" onclick="startGame()" disabled>
+                    <i class="fas fa-rocket"></i> ابدأ التحدي
+                </button>
+            </div>
+
+            <!-- قسم اللعبة -->
+            <div id="gamePlaySection" style="display: none;">
+                <div class="timer-container">
+                    <div class="timer-display" id="timerDisplay">02:00</div>
+                    <div class="timer-label">دقيقتين متبقيتين</div>
+                </div>
+
+                <div class="game-board">
+                    <div class="scoreboard" id="scoreboard">
+                        <h3><i class="fas fa-clipboard-list"></i> اللاعبون</h3>
+                        <div id="scoresContainer"></div>
+                    </div>
+                    
+                    <div class="leaderboard" id="leaderboard">
+                        <h3><i class="fas fa-trophy"></i> الترتيب</h3>
+                        <div id="leaderboardList"></div>
+                    </div>
+                </div>
+
+                <div class="riddle-box">
+                    <div class="riddle-text" id="riddleText"></div>
+                    <div class="answer-section">
+                        <input type="text" class="answer-input" id="answerInput" placeholder="اكتب الإجابة هنا...">
+                        <div class="btn-group">
+                            <button class="answer-btn" onclick="checkAnswer()">
+                                <i class="fas fa-check-circle"></i> تأكيد الإجابة
+                            </button>
+                            <button class="answer-btn skip-btn" onclick="skipRiddle()">
+                                <i class="fas fa-forward"></i> تخطي السؤال
+                            </button>
+                        </div>
+                        <div class="feedback" id="feedback"></div>
+                        <button class="next-btn" id="nextBtn" onclick="nextPlayer()" style="display: none;">
+                            <i class="fas fa-arrow-right"></i> اللاعب التالي
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- نهاية اللعبة -->
+            <div class="game-over" id="gameOver">
+                <div class="winner-announcement" id="winnerText"></div>
+                <div class="final-scores" id="finalScores"></div>
+                <button class="restart-btn" onclick="restartGame()">
+                    <i class="fas fa-redo-alt"></i> لعبة جديدة
+                </button>
+            </div>
+        </section>
     </div>
+
+    <!-- تذييل الموقع -->
+    <footer class="site-footer">
+        <p>شارك الموقع مع أصدقائك وتحداهم في لعبة الألغاز الشعبية!</p>
+        <p>للإقتراحات أو الاستفسارات: alazzaz.games@example.com</p>
+        
+        <div class="social-links">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+        
+        <div class="copyright">
+            جميع الحقوق محفوظة &copy; 2023 - عبد العزيز
+        </div>
+    </footer>
 
     <script>
         // بيانات اللعبة
@@ -1034,7 +1039,7 @@
         let gameActive = false;
         const maxRounds = 10;
 
-        // مجموعة الألغاز الشعبية الموسعة
+        // مجموعة الألغاز الشعبية
         const riddles = [
             {
                 question: "أبنشدك عن بيت له باب واحد، وله مية باب وله ألف باب، وله ألف ألف باب، وما يدخله إلا الطيب",
@@ -1095,28 +1100,18 @@
             {
                 question: "أبنشدك عن شيء يدور حول البيت وما يدخله",
                 answer: "الطريق"
-            },
-            {
-                question: "أبنشدك عن شيء يخترق الزجاج ولا يكسره",
-                answer: "الضوء"
-            },
-            {
-                question: "أبنشدك عن شيء ينام ولا يقوم إلا بالضرب",
-                answer: "المسمار"
-            },
-            {
-                question: "أبنشدك عن شيء له أسنان ولا يعض",
-                answer: "المشط"
-            },
-            {
-                question: "أبنشدك عن شيء يكتب ولا يقرأ",
-                answer: "القلم"
-            },
-            {
-                question: "أبنشدك عن شيء كلما أخذت منه زاد",
-                answer: "الحفرة"
             }
         ];
+
+        // إظهار لعبة الألغاز
+        function showGame() {
+            document.querySelector('.about-section').style.display = 'none';
+            document.querySelector('.games-section').style.display = 'none';
+            document.getElementById('gameContainer').style.display = 'block';
+            document.getElementById('gamePlaySection').style.display = 'none';
+            document.getElementById('setupSection').style.display = 'block';
+            document.getElementById('gameOver').style.display = 'none';
+        }
 
         // إضافة لاعب جديد
         function addPlayer() {
@@ -1160,7 +1155,7 @@
         // بدء اللعبة
         function startGame() {
             document.getElementById('setupSection').style.display = 'none';
-            document.getElementById('gameSection').style.display = 'block';
+            document.getElementById('gamePlaySection').style.display = 'block';
             
             currentPlayerIndex = 0;
             gameRounds = 0;
@@ -1186,14 +1181,12 @@
 
         // بدء العداد الزمني (دقيقتين كاملتين)
         function startTimer() {
-            timer = 120; // دقيقتين كاملتين
+            timer = 120;
             updateTimerDisplay();
-            updateProgressBar();
             
             timerInterval = setInterval(() => {
                 timer--;
                 updateTimerDisplay();
-                updateProgressBar();
                 
                 if (timer <= 30) {
                     document.querySelector('.timer-container').style.animation = 'pulse 1s infinite';
@@ -1203,7 +1196,7 @@
                     clearInterval(timerInterval);
                     timeUp();
                 }
-            }, 1000); // تحديث كل ثانية واحدة
+            }, 1000);
         }
 
         // تحديث عرض العداد (بتنسيق mm:ss)
@@ -1212,12 +1205,6 @@
             const seconds = timer % 60;
             document.getElementById('timerDisplay').textContent = 
                 `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-        
-        // تحديث شريط التقدم
-        function updateProgressBar() {
-            const progressPercentage = (timer / 120) * 100;
-            document.getElementById('progressFill').style.width = `${progressPercentage}%`;
         }
 
         // انتهاء الوقت
@@ -1381,7 +1368,7 @@
             gameActive = false;
             clearInterval(timerInterval);
             
-            document.getElementById('gameSection').style.display = 'none';
+            document.getElementById('gamePlaySection').style.display = 'none';
             document.getElementById('gameOver').style.display = 'block';
             
             // العثور على الفائز

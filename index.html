@@ -4,19 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>موقع الألغاز الشعبية - عبد العزيز</title>
-    
-    <!-- رؤوس الأمان المطلوبة -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data: https://images.unsplash.com; font-src 'self' https://fonts.gstatic.com; frame-src 'none'; object-src 'none';">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Permissions-Policy" content="geolocation=(), camera=(), microphone=()">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* أنماط CSS الأصلية هنا بدون تغيير */
         * {
             margin: 0;
             padding: 0;
@@ -32,7 +22,903 @@
             overflow-x: hidden;
         }
 
-        /* ... (بقية الأنماط تبقى كما هي) ... */
+        /* رأس الموقع */
+        .site-header {
+            background: linear-gradient(to right, #8b4513, #a52a2a);
+            border-radius: 0 0 20px 20px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            border-bottom: 5px solid #ffd700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .site-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(to right, #ffd700, #ffb700);
+        }
+
+        .site-header h1 {
+            color: #ffd700;
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: 900;
+            text-shadow: 3px 3px 0 #8b0000;
+            letter-spacing: 1px;
+            animation: textGlow 2s infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 3px 3px 0 #8b0000; }
+            to { text-shadow: 3px 3px 15px #ffd700, 3px 3px 0 #8b0000; }
+        }
+
+        .site-header p {
+            color: #fff;
+            font-size: 1.4em;
+            font-weight: 700;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* قائمة التنقل */
+        .site-nav {
+            background: #fff3cc;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 30px auto;
+            max-width: 1000px;
+            border: 3px solid #d4a017;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .site-nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .site-nav li {
+            margin: 0 15px;
+        }
+
+        .site-nav a {
+            text-decoration: none;
+            color: #8b4513;
+            font-weight: 900;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .site-nav a::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .site-nav a:hover::before {
+            left: 100%;
+        }
+
+        .site-nav a:hover {
+            background: #ffd700;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .site-nav a.active {
+            background: linear-gradient(to right, #ffd700, #ffb700);
+            box-shadow: 0 5px 0 #b8860b;
+            transform: translateY(-3px);
+        }
+
+        /* المحتوى الرئيسي */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-section {
+            display: none;
+            background: #fff9e6;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 4px solid #d4a017;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        .page-section::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #ffd700;
+            border-radius: 15px;
+            border: 3px solid #8b4513;
+        }
+
+        .section-title {
+            color: #8b4513;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            padding-bottom: 15px;
+            border-bottom: 3px dashed #d4a017;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "★";
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #d4a017;
+            font-size: 1.5em;
+            background: #fff9e6;
+            padding: 0 10px;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            color: #8b4513;
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            border: 5px solid #d4a017;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* قسم الألعاب */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .game-card {
+            background: #fff3cc;
+            border-radius: 20px;
+            padding: 25px;
+            border: 3px solid #d4a017;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(to right, #ffd700, #ffb700);
+        }
+
+        .game-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .game-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(to bottom, #ffd700, #d4a017);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 5px solid #8b4513;
+            box-shadow: 0 5px 0 #b8860b;
+            font-size: 2.5em;
+            color: #8b4513;
+        }
+
+        .game-card h3 {
+            color: #8b4513;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .game-card p {
+            color: #8b4513;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .play-btn {
+            background: linear-gradient(to bottom, #ff6b6b, #d9534f);
+            color: white;
+            padding: 12px 35px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 0 #8b0000;
+            border: 2px solid #8b0000;
+            display: inline-block;
+        }
+
+        .play-btn:hover {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #8b0000;
+        }
+
+        /* قسم اتصل بنا */
+        .contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #fff3cc;
+            border-radius: 20px;
+            border: 3px solid #d4a017;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #8b4513;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 3px solid #d4a017;
+            border-radius: 15px;
+            font-size: 1.1em;
+            background: #fff;
+            color: #8b4513;
+            font-weight: 700;
+        }
+
+        .form-group textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to bottom, #32CD32, #228B22);
+            color: white;
+            padding: 16px 45px;
+            border: none;
+            border-radius: 18px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 5px 0 #006400;
+            border: 3px solid #006400;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #006400;
+        }
+
+        /* لعبة الألغاز الشعبية */
+        #gameContainer {
+            display: none;
+        }
+
+        #gameContainer.active {
+            display: block;
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .game-header h2 {
+            color: #8b4513;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 900;
+            text-shadow: 2px 2px 0 #ffd700;
+        }
+
+        .game-header p {
+            color: #a52a2a;
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        /* المؤقت */
+        .timer-container {
+            background: linear-gradient(to bottom, #4a86e8, #1c4587);
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            border: 4px solid #0d2c5e;
+            box-shadow: 0 6px 0 #0d2c5e;
+        }
+
+        .timer-display {
+            font-size: 3.5em;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 8px;
+            text-shadow: 3px 3px 0 #0d2c5e;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        .timer-label {
+            font-size: 1.3em;
+            color: #fff;
+            font-weight: 700;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        }
+
+        /* لوحة اللعبة */
+        .game-board {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .scoreboard, .leaderboard {
+            background: #fff3cc;
+            border-radius: 18px;
+            padding: 20px;
+            border: 3px solid #d4a017;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scoreboard::before, .leaderboard::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(to right, #ffd700, #ffb700);
+        }
+
+        .scoreboard h3, .leaderboard h3 {
+            color: #8b4513;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: 700;
+            background: linear-gradient(to right, #ffd700, #ffb700);
+            padding: 8px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            border: 2px solid #8b4513;
+            box-shadow: 0 3px 0 #b8860b;
+        }
+
+        .score-item, .leader-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 12px 18px;
+            margin: 10px 0;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 2px solid #d4a017;
+            font-weight: 700;
+            color: #8b4513;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .score-item.current-player {
+            background: linear-gradient(to bottom, #ffd700, #d4a017);
+            transform: scale(1.03);
+            box-shadow: 0 5px 0 #b8860b;
+            border-color: #8b4513;
+            animation: highlight 1.5s infinite;
+        }
+
+        @keyframes highlight {
+            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+        }
+
+        .leader-item.top-player {
+            background: linear-gradient(to bottom, #ffd700, #d4a017);
+            box-shadow: 0 4px 0 #b8860b;
+            border-color: #8b4513;
+        }
+
+        /* صندوق اللغز */
+        .riddle-box {
+            background: #fff3cc;
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 3px solid #d4a017;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .riddle-text {
+            font-size: 1.7em;
+            color: #8b4513;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-weight: 700;
+            padding: 20px;
+            background: #fff;
+            border-radius: 15px;
+            border: 3px dashed #d4a017;
+            position: relative;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .riddle-text::before {
+            content: """;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 4em;
+            color: #d4a017;
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .riddle-text::after {
+            content: """;
+            position: absolute;
+            bottom: 15px;
+            left: 20px;
+            font-size: 4em;
+            color: #d4a017;
+            opacity: 0.3;
+            font-family: serif;
+            transform: rotate(180deg);
+        }
+
+        /* قسم الإجابة */
+        .answer-section {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .answer-input {
+            padding: 16px 25px;
+            border: 4px solid #d4a017;
+            border-radius: 15px;
+            font-size: 20px;
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto 20px;
+            background: #fff;
+            color: #8b4513;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.7);
+            transform: scale(1.02);
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .answer-btn {
+            background: linear-gradient(to bottom, #4da6ff, #0066cc);
+            color: white;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 0 #003366;
+            border: 2px solid #003366;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 250px;
+        }
+
+        .answer-btn:hover {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #003366;
+        }
+
+        .skip-btn {
+            background: linear-gradient(to bottom, #ffa500, #cc8400);
+            border: 2px solid #8b4513;
+            box-shadow: 0 5px 0 #8b4513;
+        }
+
+        .feedback {
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 15px;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: slideIn 0.5s ease;
+            border: 3px solid;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .feedback.correct {
+            background: linear-gradient(to bottom, #c6f6d5, #9ae6b4);
+            color: #22543d;
+            border-color: #48bb78;
+        }
+
+        .feedback.incorrect {
+            background: linear-gradient(to bottom, #fed7d7, #feb2b2);
+            color: #742a2a;
+            border-color: #e53e3e;
+        }
+
+        .next-btn {
+            background: linear-gradient(to bottom, #38a169, #2f855a);
+            color: white;
+            padding: 16px 45px;
+            border: none;
+            border-radius: 18px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 5px 0 #1a3c29;
+            border: 3px solid #1a3c29;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 0 auto;
+        }
+
+        .next-btn:hover {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #1a3c29;
+        }
+
+        /* نهاية اللعبة */
+        .game-over {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(to bottom, #fff3cc, #ffebad);
+            border-radius: 25px;
+            margin-top: 25px;
+            border: 4px solid #d4a017;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: zoomIn 0.8s ease;
+            position: relative;
+            overflow: hidden;
+            display: none;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .winner-announcement {
+            font-size: 2.5em;
+            color: #8b4513;
+            margin-bottom: 30px;
+            font-weight: 900;
+            text-shadow: 3px 3px 0 #ffd700;
+            background: linear-gradient(to right, #ffd700, #ffb700);
+            padding: 15px 40px;
+            border-radius: 50px;
+            border: 4px solid #8b4513;
+            display: inline-block;
+            box-shadow: 0 6px 0 #b8860b;
+            position: relative;
+        }
+
+        .winner-announcement::after {
+            content: "🏆";
+            position: absolute;
+            right: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+        }
+
+        .winner-announcement::before {
+            content: "🏆";
+            position: absolute;
+            left: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+        }
+
+        .final-scores {
+            margin-top: 30px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 20px;
+            border: 3px solid #d4a017;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 30px auto;
+        }
+
+        .restart-btn {
+            background: linear-gradient(to bottom, #ff6b6b, #d9534f);
+            color: white;
+            padding: 18px 50px;
+            border: none;
+            border-radius: 20px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            box-shadow: 0 6px 0 #8b0000;
+            border: 3px solid #8b0000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .restart-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .restart-btn:hover::before {
+            left: 100%;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #8b0000;
+        }
+
+        /* تذييل الموقع */
+        .site-footer {
+            background: linear-gradient(to right, #8b4513, #a52a2a);
+            color: #ffd700;
+            text-align: center;
+            padding: 30px;
+            margin-top: 70px;
+            border-radius: 20px 20px 0 0;
+            border-top: 5px solid #ffd700;
+            position: relative;
+        }
+
+        .site-footer::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(to right, #ffd700, #ffb700);
+            border-radius: 5px;
+        }
+
+        .site-footer p {
+            font-size: 1.2em;
+            margin: 10px 0;
+            font-weight: 700;
+        }
+
+        .copyright {
+            font-size: 1.4em;
+            margin-top: 20px;
+            color: #ffd700;
+            font-weight: 900;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: #ffd700;
+            color: #8b4513;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            transition: all 0.3s ease;
+            border: 2px solid #8b4513;
+            box-shadow: 0 4px 0 #b8860b;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-8px);
+            background: #ffb700;
+            box-shadow: 0 8px 0 #b8860b;
+        }
+
+        /* أنماط للزخارف */
+        .folk-pattern {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            opacity: 0.15;
+            z-index: 0;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .pattern-1 {
+            top: 10%;
+            left: 5%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,5 C65,5 80,15 85,35 C95,50 95,70 85,85 C70,95 50,95 35,85 C15,80 5,65 5,50 C5,35 15,20 35,15 C40,10 45,5 50,5 Z" fill="none" stroke="%23d4a017" stroke-width="2"/></svg>');
+            animation: rotate 30s infinite linear;
+        }
+
+        .pattern-2 {
+            bottom: 10%;
+            right: 5%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,5 75,35 95,50 75,65 50,95 25,65 5,50 25,35" fill="none" stroke="%238b4513" stroke-width="2"/></svg>');
+            animation: rotateReverse 40s infinite linear;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotateReverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        /* أنماط متجاوبة */
+        @media (max-width: 768px) {
+            .site-header h1 {
+                font-size: 2em;
+            }
+            
+            .site-nav a {
+                padding: 8px 15px;
+                font-size: 1em;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .game-card {
+                padding: 20px;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .answer-btn {
+                min-width: 100%;
+                max-width: 300px;
+            }
+            
+            .timer-display {
+                font-size: 2.5em;
+            }
+            
+            .page-section {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -74,7 +960,7 @@
                 </div>
                 
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&h=400&q=80" alt="صورة عن الألغاز الشعبية" crossorigin="anonymous">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&h=400&q=80" alt="صورة عن الألغاز الشعبية">
                 </div>
             </div>
         </section>
@@ -140,7 +1026,7 @@
             
             <div class="about-content">
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=600&h=400&q=80" alt="فريق العمل" crossorigin="anonymous">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=600&h=400&q=80" alt="فريق العمل">
                 </div>
                 
                 <div class="about-text">
@@ -164,9 +1050,6 @@
             
             <div class="contact-form">
                 <form id="contactForm">
-                    <!-- حماية CSRF -->
-                    <input type="hidden" id="csrf_token" name="csrf_token">
-                    
                     <div class="form-group">
                         <label for="name">اسمك الكريم</label>
                         <input type="text" id="name" placeholder="أدخل اسمك" required>
@@ -299,10 +1182,10 @@
         <p>للإقتراحات أو الاستفسارات: zwza25845@gmail.com</p>
         
         <div class="social-links">
-            <a href="#" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
-            <a href="#" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-            <a href="#" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
-            <a href="#" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
         </div>
         
         <div class="copyright">
@@ -311,41 +1194,6 @@
     </footer>
 
     <script>
-        // توليد رمز CSRF لمنع هجمات التزوير
-        function generateCSRFToken() {
-            const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-            localStorage.setItem('csrf_token', token);
-            return token;
-        }
-        
-        // تنقية المدخلات لمنع هجمات XSS
-        function sanitizeInput(input) {
-            return input
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#x27;')
-                .replace(/\//g, '&#x2F;');
-        }
-        
-        // تحقق من روابط التوجيه لمنع Open Redirect
-        function validateRedirectUrl(url) {
-            const allowedDomains = ['yourdomain.com', 'trusted-site.com'];
-            const domain = new URL(url).hostname;
-            
-            if (!allowedDomains.includes(domain)) {
-                return '/'; // الصفحة الرئيسية
-            }
-            return url;
-        }
-        
-        // تهيئة رمز CSRF عند تحميل الصفحة
-        if (!localStorage.getItem('csrf_token')) {
-            generateCSRFToken();
-        }
-        document.getElementById('csrf_token').value = localStorage.getItem('csrf_token');
-
         // التنقل بين الصفحات
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(e) {
@@ -452,20 +1300,15 @@
 
         // إضافة لاعب جديد
         function addPlayer() {
-            let playerName = document.getElementById('playerName').value.trim();
-            if (playerName) {
-                // تنظيف المدخلات لمنع XSS
-                playerName = sanitizeInput(playerName);
+            const playerName = document.getElementById('playerName').value.trim();
+            if (playerName && !players.includes(playerName)) {
+                players.push(playerName);
+                scores[playerName] = 0;
+                updatePlayersList();
+                document.getElementById('playerName').value = '';
                 
-                if (!players.includes(playerName)) {
-                    players.push(playerName);
-                    scores[playerName] = 0;
-                    updatePlayersList();
-                    document.getElementById('playerName').value = '';
-                    
-                    if (players.length >= 2) {
-                        document.getElementById('startBtn').disabled = false;
-                    }
+                if (players.length >= 2) {
+                    document.getElementById('startBtn').disabled = false;
                 }
             }
         }
@@ -643,12 +1486,9 @@
             if (!gameActive) return;
             
             clearInterval(timerInterval);
-            let userAnswer = document.getElementById('answerInput').value.trim();
+            const userAnswer = document.getElementById('answerInput').value.trim();
             const correctAnswer = riddles[currentRiddleIndex].answer;
             const feedback = document.getElementById('feedback');
-            
-            // تنظيف الإجابة قبل المقارنة
-            userAnswer = sanitizeInput(userAnswer);
             
             if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
                 feedback.textContent = `🎉 إجابة صحيحة! ${players[currentPlayerIndex]} حصل على نقطة!`;
@@ -800,21 +1640,9 @@
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // تحقق من رمز CSRF
-            const formToken = document.getElementById('csrf_token').value;
-            const storedToken = localStorage.getItem('csrf_token');
-            
-            if (formToken !== storedToken) {
-                alert('رمز الأمان غير صالح! يرجى تحديث الصفحة والمحاولة مرة أخرى.');
-                return;
-            }
-            
             // هنا يمكنك إضافة كود إرسال النموذج
             alert('تم إرسال رسالتك بنجاح! سنتواصل معك في أقرب وقت.');
             this.reset();
-            
-            // إنشاء رمز CSRF جديد بعد كل إرسال
-            document.getElementById('csrf_token').value = generateCSRFToken();
         });
     </script>
 </body>

@@ -4,7 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>موقع الألغاز الشعبية - عبد العزيز</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- رؤوس الأمان المطلوبة -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data: https://images.unsplash.com; font-src 'self' https://fonts.gstatic.com; frame-src 'none'; object-src 'none';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), camera=(), microphone=()">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -960,7 +969,7 @@
                 </div>
                 
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&h=400&q=80" alt="صورة عن الألغاز الشعبية">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&h=400&q=80" alt="صورة عن الألغاز الشعبية" crossorigin="anonymous">
                 </div>
             </div>
         </section>
@@ -1026,7 +1035,7 @@
             
             <div class="about-content">
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=600&h=400&q=80" alt="فريق العمل">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=600&h=400&q=80" alt="فريق العمل" crossorigin="anonymous">
                 </div>
                 
                 <div class="about-text">
@@ -1050,6 +1059,9 @@
             
             <div class="contact-form">
                 <form id="contactForm">
+                    <!-- حماية CSRF -->
+                    <input type="hidden" id="csrf_token" name="csrf_token">
+                    
                     <div class="form-group">
                         <label for="name">اسمك الكريم</label>
                         <input type="text" id="name" placeholder="أدخل اسمك" required>
@@ -1182,10 +1194,10 @@
         <p>للإقتراحات أو الاستفسارات: zwza25845@gmail.com</p>
         
         <div class="social-links">
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+            <a href="#" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="#" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+            <a href="#" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
         </div>
         
         <div class="copyright">
@@ -1194,6 +1206,30 @@
     </footer>
 
     <script>
+        // توليد رمز CSRF لمنع هجمات التزوير
+        function generateCSRFToken() {
+            const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            localStorage.setItem('csrf_token', token);
+            return token;
+        }
+        
+        // تنقية المدخلات لمنع هجمات XSS
+        function sanitizeInput(input) {
+            return input
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#x27;')
+                .replace(/\//g, '&#x2F;');
+        }
+        
+        // تهيئة رمز CSRF عند تحميل الصفحة
+        if (!localStorage.getItem('csrf_token')) {
+            generateCSRFToken();
+        }
+        document.getElementById('csrf_token').value = localStorage.getItem('csrf_token');
+
         // التنقل بين الصفحات
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(e) {
@@ -1300,15 +1336,20 @@
 
         // إضافة لاعب جديد
         function addPlayer() {
-            const playerName = document.getElementById('playerName').value.trim();
-            if (playerName && !players.includes(playerName)) {
-                players.push(playerName);
-                scores[playerName] = 0;
-                updatePlayersList();
-                document.getElementById('playerName').value = '';
+            let playerName = document.getElementById('playerName').value.trim();
+            if (playerName) {
+                // تنظيف المدخلات لمنع XSS
+                playerName = sanitizeInput(playerName);
                 
-                if (players.length >= 2) {
-                    document.getElementById('startBtn').disabled = false;
+                if (!players.includes(playerName)) {
+                    players.push(playerName);
+                    scores[playerName] = 0;
+                    updatePlayersList();
+                    document.getElementById('playerName').value = '';
+                    
+                    if (players.length >= 2) {
+                        document.getElementById('startBtn').disabled = false;
+                    }
                 }
             }
         }
@@ -1486,9 +1527,12 @@
             if (!gameActive) return;
             
             clearInterval(timerInterval);
-            const userAnswer = document.getElementById('answerInput').value.trim();
+            let userAnswer = document.getElementById('answerInput').value.trim();
             const correctAnswer = riddles[currentRiddleIndex].answer;
             const feedback = document.getElementById('feedback');
+            
+            // تنظيف الإجابة قبل المقارنة
+            userAnswer = sanitizeInput(userAnswer);
             
             if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
                 feedback.textContent = `🎉 إجابة صحيحة! ${players[currentPlayerIndex]} حصل على نقطة!`;
@@ -1640,9 +1684,21 @@
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // تحقق من رمز CSRF
+            const formToken = document.getElementById('csrf_token').value;
+            const storedToken = localStorage.getItem('csrf_token');
+            
+            if (formToken !== storedToken) {
+                alert('رمز الأمان غير صالح! يرجى تحديث الصفحة والمحاولة مرة أخرى.');
+                return;
+            }
+            
             // هنا يمكنك إضافة كود إرسال النموذج
             alert('تم إرسال رسالتك بنجاح! سنتواصل معك في أقرب وقت.');
             this.reset();
+            
+            // إنشاء رمز CSRF جديد بعد كل إرسال
+            document.getElementById('csrf_token').value = generateCSRFToken();
         });
     </script>
 </body>

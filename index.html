@@ -16,7 +16,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #f9d423, #ff4e50, #8b4513);
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -347,15 +347,14 @@
         }
 
         .timer-container {
-            background: linear-gradient(to bottom, #ff6b6b, #d9534f);
+            background: linear-gradient(to bottom, #4a86e8, #1c4587);
             border-radius: 18px;
             padding: 18px;
             margin-bottom: 25px;
             text-align: center;
             position: relative;
-            border: 4px solid #8b0000;
-            box-shadow: 0 6px 0 #8b0000;
-            animation: pulse 2s infinite;
+            border: 4px solid #0d2c5e;
+            box-shadow: 0 6px 0 #0d2c5e;
         }
 
         .timer-display {
@@ -363,7 +362,7 @@
             font-weight: 900;
             color: #fff;
             margin-bottom: 8px;
-            text-shadow: 3px 3px 0 #8b0000;
+            text-shadow: 3px 3px 0 #0d2c5e;
             font-family: 'Courier New', monospace;
             letter-spacing: 2px;
         }
@@ -613,7 +612,6 @@
             justify-content: center;
             gap: 12px;
             margin: 0 auto;
-            animation: pulse 1.5s infinite;
         }
 
         .next-btn:hover {
@@ -912,6 +910,33 @@
                 display: none;
             }
         }
+
+        /* شريط التقدم الزمني */
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #4CAF50, #8BC34A);
+            border-radius: 10px;
+            transition: width 1s linear;
+        }
+
+        .time-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #555;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -944,8 +969,16 @@
 
         <div class="game-section" id="gameSection">
             <div class="timer-container">
-                <div class="timer-display" id="timerDisplay">60</div>
-                <div class="timer-label">ثانية متبقية</div>
+                <div class="timer-display" id="timerDisplay">02:00</div>
+                <div class="timer-label">دقيقتين متبقيتين</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="time-labels">
+                    <span>02:00</span>
+                    <span>01:00</span>
+                    <span>00:00</span>
+                </div>
             </div>
 
             <div class="game-board">
@@ -996,7 +1029,7 @@
         let scores = {};
         let currentRiddleIndex = 0;
         let gameRounds = 0;
-        let timer = 60;
+        let timer = 120; // 120 ثانية = دقيقتين
         let timerInterval;
         let gameActive = false;
         const maxRounds = 10;
@@ -1097,9 +1130,6 @@
                 if (players.length >= 2) {
                     document.getElementById('startBtn').disabled = false;
                 }
-                
-                // تأثير صوتي
-                playSound('add');
             }
         }
 
@@ -1125,9 +1155,6 @@
             if (players.length < 2) {
                 document.getElementById('startBtn').disabled = true;
             }
-            
-            // تأثير صوتي
-            playSound('remove');
         }
 
         // بدء اللعبة
@@ -1147,9 +1174,6 @@
             updateLeaderboard();
             showCurrentRiddle();
             startTimer();
-            
-            // تأثير صوتي
-            playSound('start');
         }
 
         // خلط المصفوفة
@@ -1160,30 +1184,40 @@
             }
         }
 
-        // بدء العداد الزمني
+        // بدء العداد الزمني (دقيقتين كاملتين)
         function startTimer() {
-            timer = 60;
+            timer = 120; // دقيقتين كاملتين
             updateTimerDisplay();
+            updateProgressBar();
             
             timerInterval = setInterval(() => {
                 timer--;
                 updateTimerDisplay();
+                updateProgressBar();
                 
-                if (timer <= 10) {
+                if (timer <= 30) {
                     document.querySelector('.timer-container').style.animation = 'pulse 1s infinite';
-                    if (timer === 10) playSound('tick');
                 }
                 
                 if (timer <= 0) {
                     clearInterval(timerInterval);
                     timeUp();
                 }
-            }, 1000);
+            }, 1000); // تحديث كل ثانية واحدة
         }
 
-        // تحديث عرض العداد
+        // تحديث عرض العداد (بتنسيق mm:ss)
         function updateTimerDisplay() {
-            document.getElementById('timerDisplay').textContent = timer;
+            const minutes = Math.floor(timer / 60);
+            const seconds = timer % 60;
+            document.getElementById('timerDisplay').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // تحديث شريط التقدم
+        function updateProgressBar() {
+            const progressPercentage = (timer / 120) * 100;
+            document.getElementById('progressFill').style.width = `${progressPercentage}%`;
         }
 
         // انتهاء الوقت
@@ -1203,9 +1237,6 @@
             if (gameRounds >= maxRounds) {
                 setTimeout(endGame, 2000);
             }
-            
-            // تأثير صوتي
-            playSound('timeup');
         }
 
         // تحديث لوحة النقاط
@@ -1290,11 +1321,9 @@
                 feedback.textContent = `🎉 إجابة صحيحة! ${players[currentPlayerIndex]} حصل على نقطة!`;
                 feedback.className = 'feedback correct';
                 scores[players[currentPlayerIndex]]++;
-                playSound('correct');
             } else {
                 feedback.textContent = `❌ إجابة خاطئة! الإجابة الصحيحة هي: ${correctAnswer}`;
                 feedback.className = 'feedback incorrect';
-                playSound('incorrect');
             }
             
             document.getElementById('answerInput').disabled = true;
@@ -1329,9 +1358,6 @@
             if (gameRounds >= maxRounds) {
                 setTimeout(endGame, 2000);
             }
-            
-            // تأثير صوتي
-            playSound('skip');
         }
 
         // اللاعب التالي
@@ -1345,7 +1371,6 @@
                 updateScoreboard();
                 updateLeaderboard();
                 showCurrentRiddle();
-                playSound('next');
             } else {
                 endGame();
             }
@@ -1404,9 +1429,6 @@
                 `;
                 finalScoresContainer.appendChild(scoreDiv);
             });
-            
-            // تأثير صوتي
-            playSound('win');
         }
 
         // إعادة بدء اللعبة
@@ -1425,51 +1447,6 @@
             document.getElementById('playersList').innerHTML = '';
             document.getElementById('startBtn').disabled = true;
             document.getElementById('playerName').value = '';
-            
-            // تأثير صوتي
-            playSound('restart');
-        }
-
-        // تأثيرات صوتية
-        function playSound(type) {
-            // هذا مجرد محاكاة للتأثيرات الصوتية
-            // في تطبيق حقيقي، سيكون هناك ملفات صوتية فعلية
-            const sounds = {
-                'correct': { freq: 800, duration: 300 },
-                'incorrect': { freq: 300, duration: 500 },
-                'start': { freq: 600, duration: 500 },
-                'timeup': { freq: 400, duration: 700 },
-                'next': { freq: 500, duration: 200 },
-                'add': { freq: 700, duration: 200 },
-                'remove': { freq: 400, duration: 200 },
-                'skip': { freq: 300, duration: 300 },
-                'win': { freq: 900, duration: 1000 },
-                'restart': { freq: 600, duration: 400 },
-                'tick': { freq: 500, duration: 100 }
-            };
-            
-            if (sounds[type]) {
-                // محاكاة الصوت باستخدام Web Audio API
-                try {
-                    const context = new (window.AudioContext || window.webkitAudioContext)();
-                    const oscillator = context.createOscillator();
-                    const gainNode = context.createGain();
-                    
-                    oscillator.type = 'sine';
-                    oscillator.frequency.value = sounds[type].freq;
-                    gainNode.gain.value = 0.3;
-                    
-                    oscillator.connect(gainNode);
-                    gainNode.connect(context.destination);
-                    
-                    oscillator.start();
-                    setTimeout(() => {
-                        oscillator.stop();
-                    }, sounds[type].duration);
-                } catch (e) {
-                    console.log("Web Audio API not supported");
-                }
-            }
         }
 
         // إضافة مستمعي الأحداث
@@ -1484,11 +1461,6 @@
                 checkAnswer();
             }
         });
-
-        // التأكد من أن التأثيرات تبدأ بعد التفاعل الأول
-        document.addEventListener('click', function() {
-            // يمكن هنا تهيئة نظام الصوت إذا لزم الأمر
-        }, { once: true });
     </script>
 </body>
 </html>

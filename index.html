@@ -22,7 +22,7 @@
             overflow-x: hidden;
         }
 
-        /* أنماط رأس الموقع */
+        /* رأس الموقع */
         .site-header {
             background: linear-gradient(to right, #8b4513, #a52a2a);
             border-radius: 0 0 20px 20px;
@@ -69,7 +69,7 @@
             line-height: 1.6;
         }
 
-        /* أنماط القائمة */
+        /* قائمة التنقل */
         .site-nav {
             background: #fff3cc;
             border-radius: 15px;
@@ -133,13 +133,14 @@
             transform: translateY(-3px);
         }
 
-        /* أنماط المحتوى الرئيسي */
+        /* المحتوى الرئيسي */
         .main-content {
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .about-section {
+        .page-section {
+            display: none;
             background: #fff9e6;
             border-radius: 20px;
             padding: 40px;
@@ -149,7 +150,11 @@
             position: relative;
         }
 
-        .about-section::before {
+        .page-section.active {
+            display: block;
+        }
+
+        .page-section::before {
             content: "";
             position: absolute;
             top: -15px;
@@ -215,10 +220,7 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
-        .games-section {
-            margin-top: 50px;
-        }
-
+        /* قسم الألعاب */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -301,16 +303,76 @@
             box-shadow: 0 2px 0 #8b0000;
         }
 
-        /* أنماط لعبة الألغاز */
-        .game-section {
-            background: #fff9e6;
-            border-radius: 25px;
+        /* قسم اتصل بنا */
+        .contact-form {
+            max-width: 800px;
+            margin: 0 auto;
             padding: 30px;
-            margin: 50px auto;
-            border: 5px solid #d4a017;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            max-width: 1000px;
+            background: #fff3cc;
+            border-radius: 20px;
+            border: 3px solid #d4a017;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #8b4513;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 3px solid #d4a017;
+            border-radius: 15px;
+            font-size: 1.1em;
+            background: #fff;
+            color: #8b4513;
+            font-weight: 700;
+        }
+
+        .form-group textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to bottom, #32CD32, #228B22);
+            color: white;
+            padding: 16px 45px;
+            border: none;
+            border-radius: 18px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 5px 0 #006400;
+            border: 3px solid #006400;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #006400;
+        }
+
+        /* لعبة الألغاز الشعبية */
+        #gameContainer {
             display: none;
+        }
+
+        #gameContainer.active {
+            display: block;
         }
 
         .game-header {
@@ -332,7 +394,7 @@
             font-weight: 700;
         }
 
-        /* أنماط المؤقت */
+        /* المؤقت */
         .timer-container {
             background: linear-gradient(to bottom, #4a86e8, #1c4587);
             border-radius: 18px;
@@ -361,7 +423,7 @@
             text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
         }
 
-        /* أنماط لوحة اللعبة */
+        /* لوحة اللعبة */
         .game-board {
             display: flex;
             gap: 25px;
@@ -437,7 +499,7 @@
             border-color: #8b4513;
         }
 
-        /* أنماط صندوق اللغز */
+        /* صندوق اللغز */
         .riddle-box {
             background: #fff3cc;
             border-radius: 18px;
@@ -489,7 +551,7 @@
             transform: rotate(180deg);
         }
 
-        /* أنماط قسم الإجابة */
+        /* قسم الإجابة */
         .answer-section {
             margin-bottom: 25px;
             position: relative;
@@ -613,7 +675,7 @@
             box-shadow: 0 2px 0 #1a3c29;
         }
 
-        /* أنماط نهاية اللعبة */
+        /* نهاية اللعبة */
         .game-over {
             text-align: center;
             padding: 40px;
@@ -719,7 +781,7 @@
             box-shadow: 0 2px 0 #8b0000;
         }
 
-        /* أنماط تذييل الموقع */
+        /* تذييل الموقع */
         .site-footer {
             background: linear-gradient(to right, #8b4513, #a52a2a);
             color: #ffd700;
@@ -852,6 +914,10 @@
             .timer-display {
                 font-size: 2.5em;
             }
+            
+            .page-section {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -868,18 +934,17 @@
     <!-- قائمة التنقل -->
     <nav class="site-nav">
         <ul>
-            <li><a href="#" class="active">الرئيسية</a></li>
-            <li><a href="#" onclick="showGame()">لعبة الألغاز</a></li>
-            <li><a href="#">الألعاب</a></li>
-            <li><a href="#">من نحن</a></li>
-            <li><a href="#">اتصل بنا</a></li>
+            <li><a href="#" class="nav-link active" data-target="home">الرئيسية</a></li>
+            <li><a href="#" class="nav-link" data-target="games">الألعاب</a></li>
+            <li><a href="#" class="nav-link" data-target="about">من نحن</a></li>
+            <li><a href="#" class="nav-link" data-target="contact">اتصل بنا</a></li>
         </ul>
     </nav>
 
     <!-- المحتوى الرئيسي -->
     <div class="main-content">
-        <!-- قسم عن الموقع -->
-        <section class="about-section">
+        <!-- الصفحة الرئيسية -->
+        <section id="home" class="page-section active">
             <h2 class="section-title">مرحباً بكم في موقع الألغاز الشعبية</h2>
             
             <div class="about-content">
@@ -887,6 +952,11 @@
                     <p>موقعنا هو وجهتك المثالية لمحبي الألغاز والألعاب الشعبية التقليدية. نقدم لكم تجربة فريدة وممتعة تجمع بين التحدي الذهني والمتعة.</p>
                     <p>تم تطوير هذا الموقع بعناية ليوفر لكم أفضل الألعاب الشعبية التي تناسب جميع الأعمار، مع الحفاظ على الأصالة والتراث العربي الأصيل.</p>
                     <p>استمتع بتحدي أصدقائك واختبر مهاراتك الذهنية مع ألعابنا المبتكرة والممتعة. يمكنك اللعب بمفردك أو مع الأصدقاء لخلق جو من المنافسة الشريفة والمتعة.</p>
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button class="play-btn" onclick="showPage('games')">
+                            <i class="fas fa-gamepad"></i> تصفح الألعاب
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="about-image">
@@ -895,8 +965,8 @@
             </div>
         </section>
         
-        <!-- قسم الألعاب -->
-        <section class="about-section games-section">
+        <!-- صفحة الألعاب -->
+        <section id="games" class="page-section">
             <h2 class="section-title">ألعابنا الشعبية</h2>
             
             <div class="games-grid">
@@ -920,7 +990,7 @@
                     <h3>تحدي الذكاء</h3>
                     <p>اختبر قدراتك الذهنية مع أسئلة متنوعة في الرياضيات والمنطق والتفكير الإبداعي. كل سؤال هو فرصة لتحسين مهاراتك.</p>
                     <button class="play-btn">
-                        <i class="fas fa-play"></i> العب الآن
+                        <i class="fas fa-play"></i> قريباً
                     </button>
                 </div>
                 
@@ -932,14 +1002,110 @@
                     <h3>تحدي الكلمات</h3>
                     <p>اكتشف الكلمات المخفية في الشبكة. كلما وجدت كلمات أكثر، كلما زادت نقاطك. تحدى نفسك ووسع مفرداتك اللغوية.</p>
                     <button class="play-btn">
-                        <i class="fas fa-play"></i> العب الآن
+                        <i class="fas fa-play"></i> قريباً
+                    </button>
+                </div>
+
+                <!-- لعبة الذاكرة -->
+                <div class="game-card">
+                    <div class="game-icon">
+                        <i class="fas fa-memory"></i>
+                    </div>
+                    <h3>لعبة الذاكرة</h3>
+                    <p>اختبر ذاكرتك وقدرتك على التركيز في هذه اللعبة الممتعة. ابحث عن الصور المتطابقة وحاول إكمال اللعبة بأقل عدد من المحاولات.</p>
+                    <button class="play-btn">
+                        <i class="fas fa-play"></i> قريباً
                     </button>
                 </div>
             </div>
         </section>
         
+        <!-- صفحة من نحن -->
+        <section id="about" class="page-section">
+            <h2 class="section-title">من نحن</h2>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=600&h=400&q=80" alt="فريق العمل">
+                </div>
+                
+                <div class="about-text">
+                    <p>نحن فريق من عشاق الألعاب الشعبية والتراث العربي، نسعى للحفاظ على هذا الإرث الثقافي وتقديمه للأجيال الجديدة بطريقة عصرية وممتعة.</p>
+                    <p>تأسس موقعنا في عام 2023 بهدف إحياء الألعاب الشعبية التقليدية وتقديمها بشكل رقمي يتناسب مع العصر الحديث، مع الحفاظ على روحها الأصيلة.</p>
+                    <p>رسالتنا هي تقديم تجربة لعب تعليمية ترفيهية تجمع بين المتعة والفائدة، وتعزز التفكير الإبداعي والمنطقي لدى اللاعبين من جميع الأعمار.</p>
+                    <h3 style="color: #8b4513; margin-top: 20px; border-bottom: 2px solid #d4a017; padding-bottom: 10px;">قيمنا:</h3>
+                    <ul style="list-style-type: none; padding-right: 20px;">
+                        <li style="margin-bottom: 10px; font-size: 1.1em;"><i class="fas fa-star" style="color: #d4a017; margin-left: 10px;"></i> الحفاظ على التراث الشعبي</li>
+                        <li style="margin-bottom: 10px; font-size: 1.1em;"><i class="fas fa-star" style="color: #d4a017; margin-left: 10px;"></i> تقديم محتوى تعليمي ممتع</li>
+                        <li style="margin-bottom: 10px; font-size: 1.1em;"><i class="fas fa-star" style="color: #d4a017; margin-left: 10px;"></i> الابتكار والتطوير المستمر</li>
+                        <li style="margin-bottom: 10px; font-size: 1.1em;"><i class="fas fa-star" style="color: #d4a017; margin-left: 10px;"></i> الجودة والتميز في التصميم</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- صفحة اتصل بنا -->
+        <section id="contact" class="page-section">
+            <h2 class="section-title">اتصل بنا</h2>
+            
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">اسمك الكريم</label>
+                        <input type="text" id="name" placeholder="أدخل اسمك" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" placeholder="أدخل بريدك الإلكتروني" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">الموضوع</label>
+                        <select id="subject" required>
+                            <option value="">اختر الموضوع</option>
+                            <option value="support">الدعم الفني</option>
+                            <option value="suggestion">مقترحات</option>
+                            <option value="partnership">شراكات</option>
+                            <option value="other">استفسارات أخرى</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">رسالتك</label>
+                        <textarea id="message" placeholder="أدخل رسالتك هنا..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">إرسال الرسالة</button>
+                </form>
+                
+                <div style="margin-top: 40px; text-align: center;">
+                    <h3 style="color: #8b4513; margin-bottom: 20px;">معلومات الاتصال</h3>
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+                        <div style="background: #fff9e6; padding: 20px; border-radius: 15px; border: 2px solid #d4a017; min-width: 250px;">
+                            <i class="fas fa-envelope" style="font-size: 2em; color: #8b4513; margin-bottom: 15px;"></i>
+                            <h4 style="color: #8b4513;">البريد الإلكتروني</h4>
+                            <p>alazzaz.games@example.com</p>
+                        </div>
+                        
+                        <div style="background: #fff9e6; padding: 20px; border-radius: 15px; border: 2px solid #d4a017; min-width: 250px;">
+                            <i class="fas fa-phone" style="font-size: 2em; color: #8b4513; margin-bottom: 15px;"></i>
+                            <h4 style="color: #8b4513;">الهاتف</h4>
+                            <p>+966 55 123 4567</p>
+                        </div>
+                        
+                        <div style="background: #fff9e6; padding: 20px; border-radius: 15px; border: 2px solid #d4a017; min-width: 250px;">
+                            <i class="fas fa-map-marker-alt" style="font-size: 2em; color: #8b4513; margin-bottom: 15px;"></i>
+                            <h4 style="color: #8b4513;">المقر الرئيسي</h4>
+                            <p>الرياض، المملكة العربية السعودية</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         <!-- لعبة الألغاز الشعبية -->
-        <section id="gameContainer" class="game-section">
+        <section id="gameContainer" class="page-section">
             <div class="game-header">
                 <h2>لعبة الألغاز الشعبية</h2>
                 <p>أبنشدك عن كذا كذا... تحدي الأذكياء!</p>
@@ -1028,6 +1194,35 @@
     </footer>
 
     <script>
+        // التنقل بين الصفحات
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.getAttribute('data-target');
+                
+                // تحديث القائمة النشطة
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                // إظهار الصفحة المحددة
+                document.querySelectorAll('.page-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(target).classList.add('active');
+            });
+        });
+
+        // إظهار لعبة الألغاز
+        function showGame() {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('gameContainer').classList.add('active');
+            
+            // إعادة تعيين اللعبة
+            restartGame();
+        }
+
         // بيانات اللعبة
         let players = [];
         let currentPlayerIndex = 0;
@@ -1103,16 +1298,6 @@
             }
         ];
 
-        // إظهار لعبة الألغاز
-        function showGame() {
-            document.querySelector('.about-section').style.display = 'none';
-            document.querySelector('.games-section').style.display = 'none';
-            document.getElementById('gameContainer').style.display = 'block';
-            document.getElementById('gamePlaySection').style.display = 'none';
-            document.getElementById('setupSection').style.display = 'block';
-            document.getElementById('gameOver').style.display = 'none';
-        }
-
         // إضافة لاعب جديد
         function addPlayer() {
             const playerName = document.getElementById('playerName').value.trim();
@@ -1156,6 +1341,7 @@
         function startGame() {
             document.getElementById('setupSection').style.display = 'none';
             document.getElementById('gamePlaySection').style.display = 'block';
+            document.getElementById('gameOver').style.display = 'none';
             
             currentPlayerIndex = 0;
             gameRounds = 0;
@@ -1431,6 +1617,7 @@
             
             document.getElementById('gameOver').style.display = 'none';
             document.getElementById('setupSection').style.display = 'block';
+            document.getElementById('gamePlaySection').style.display = 'none';
             document.getElementById('playersList').innerHTML = '';
             document.getElementById('startBtn').disabled = true;
             document.getElementById('playerName').value = '';
@@ -1447,6 +1634,15 @@
             if (e.key === 'Enter' && gameActive) {
                 checkAnswer();
             }
+        });
+
+        // نموذج الاتصال
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // هنا يمكنك إضافة كود إرسال النموذج
+            alert('تم إرسال رسالتك بنجاح! سنتواصل معك في أقرب وقت.');
+            this.reset();
         });
     </script>
 </body>
